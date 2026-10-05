@@ -87,4 +87,9 @@ khác nhau
 ----------
 LINK ICON
 https://fontawesome.com/icons/classic/solid/user?pc=rgba%28255%2C%20255%2C%20255%2C%201.00%29&sc=rgba%28255%2C%20255%2C%20255%2C%200.4%29
+---------
+LƯU Ý:
+- Tất cả các file báo cáo (file word và file ppt) sẽ được lưu trong thư mục BaoCao
+- Các file css và js sẽ được lưu trữ trong file nén Bootstrap-5.2.3-dist.zip. Nếu sử dụng đến bootstrap, hãy tải và giải nén để sử dụng.
+- code html mọi người push lên thư mục html nhé 
 
