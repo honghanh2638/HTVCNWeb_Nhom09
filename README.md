@@ -46,8 +46,6 @@ nền, khung … nên thiết kế hài hòa, không dùng quá nhiều màu s�
 cùng ý nghĩa trên trang Web phải nhất quán.
 10.Các thư viện của Bootstrap, jQuery phải được lưu trữ cùng thư mục của bài tập lớn, 
 không dùng online.
-IUH-FIT HỆ THỐNG VÀ CÔNG NGHỆ WEB
-6/59
 11.Nên dùng 1 tập tin External Stylesheet CSS cho tất cả các trang Web và một số các 
 internal stylesheet cho từng trang trong trường hợp đặc biệt.
 12.Website phải dùng tối thiểu 7 hình ảnh, khuyến khích dùng thêm các Audio, Video, 
@@ -90,6 +88,6 @@ https://fontawesome.com/icons/classic/solid/user?pc=rgba%28255%2C%20255%2C%20255
 ---------
 # LƯU Ý:
 - Tất cả các file báo cáo (file word và file ppt) sẽ được lưu trong thư mục BaoCao
-- Các file css và js sẽ được lưu trữ trong file nén Bootstrap-5.2.3-dist.zip. Nếu sử dụng đến bootstrap, hãy tải và giải nén để sử dụng.
-- code html mọi người push lên thư mục html nhé 
+- Các file css và js sẽ được lưu trữ trong file nén Bootstrap-5.2.3-dist.zip (bootstrap phiên bản 5.2.3 nhé và trong file nén đã bao gồm popper.js và jquery.js). Nếu sử dụng đến bootstrap, hãy tải và giải nén để sử dụng.
+- code html và các hình ảnh sử dụng trong trang web mọi người push lên thư mục html và thư mục image nhé.
 
