@@ -84,4 +84,7 @@ khác nhau
 - #E5F0EB - Xanh ngọc/Mint nhạt
 - #F6EFE9 - Trắng kem
 - #EBE5F4 - Tím nhạt
+----------
+# LINK ICON
+https://fontawesome.com/icons/classic/solid/user?pc=rgba%28255%2C%20255%2C%20255%2C%201.00%29&sc=rgba%28255%2C%20255%2C%20255%2C%200.4%29
 
