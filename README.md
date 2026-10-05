@@ -70,18 +70,18 @@ khác nhau
 -----------------------------------------------------------
 # Thông tin mã màu website:
 1. Màu chủ đạo và văn bản 
-#9C81C1 - Màu tím (Màu thương hiệu)
-#9A7EBD - Màu tím (Màu thương hiệu)
-#2A2135 -  Màu tím than/đen (Màu chữ tiêu đề)
-#6B607A - Màu xám tím (Màu chữ nội dung)
+- #9C81C1 - Màu tím (Màu thương hiệu)
+- #9A7EBD - Màu tím (Màu thương hiệu)
+- #2A2135 -  Màu tím than/đen (Màu chữ tiêu đề)
+- #6B607A - Màu xám tím (Màu chữ nội dung)
 2. Các màu nền:
-#FFFFFF - Màu trắng
-#F0EAF5 - Màu tím nhạt (Lavender mờ)
-#EBE4F3 - Màu tím nhạt (Lavender mờ)
+- #FFFFFF - Màu trắng
+- #F0EAF5 - Màu tím nhạt (Lavender mờ)
+- #EBE4F3 - Màu tím nhạt (Lavender mờ)
 3. Sử dụng cho thẻ danh mục
-#FCE6E2 - Hồng đào nhạt
-#F8E7DC - Cam nude/Be nhạt
-#E5F0EB - Xanh ngọc/Mint nhạt
-#F6EFE9 - Trắng kem
-#EBE5F4 - Tím nhạt
+- #FCE6E2 - Hồng đào nhạt
+- #F8E7DC - Cam nude/Be nhạt
+- #E5F0EB - Xanh ngọc/Mint nhạt
+- #F6EFE9 - Trắng kem
+- #EBE5F4 - Tím nhạt
 
