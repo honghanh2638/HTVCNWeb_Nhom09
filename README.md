@@ -67,23 +67,18 @@ khác nhau
 8. Nguyễn Thị Hồng Hạnh - Trang thanh toán/xác nhận/giỏ hàng
 -----------------------------------------------------------
 # Thông tin mã màu website:
-1. Màu chủ đạo và văn bản 
-- #9C81C1 - Màu tím (Màu thương hiệu)
-- #9A7EBD - Màu tím (Màu thương hiệu)
-- #2A2135 -  Màu tím than/đen (Màu chữ tiêu đề)
-- #6B607A - Màu xám tím (Màu chữ nội dung)
-2. Các màu nền:
-- #FFFFFF - Màu trắng
-- #F0EAF5 - Màu tím nhạt (Lavender mờ)
-- #EBE4F3 - Màu tím nhạt (Lavender mờ)
-3. Sử dụng cho thẻ danh mục
-- #FCE6E2 - Hồng đào nhạt
-- #F8E7DC - Cam nude/Be nhạt
-- #E5F0EB - Xanh ngọc/Mint nhạt
-- #F6EFE9 - Trắng kem
-- #EBE5F4 - Tím nhạt
-4. Header và footer
-- #Ef66AD 
+- #ef68ae - Sử dụng cố định cho header và footer
+- #f7ecf4
+- #e9defa
+- #f5ecf8
+- #f5f1fa
+- #e0d3f5
+- #f4f0f9
+- #e1d2f4
+- #faf9f9
+- #f7edf6
+- #f5f1f9
+- link tìm mã màu online: https://encycolorpedia.com
 ----------
 LINK ICON
 https://fontawesome.com/icons/classic/solid/user?pc=rgba%28255%2C%20255%2C%20255%2C%201.00%29&sc=rgba%28255%2C%20255%2C%20255%2C%200.4%29
