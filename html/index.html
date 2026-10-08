@@ -1,0 +1,1049 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IUH BEAUTY - Home</title>
+
+    <!-- Bootstrap 5 CDN -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
+
+    <style>
+        *, *::before, *::after { box-sizing: border-box; }
+
+        .container {
+            width: 100%;
+            max-width: 1240px;
+            padding-left: 24px;
+            padding-right: 24px;
+            max-width: none;
+            padding-left: clamp(18px, 4vw, 64px);
+            padding-right: clamp(18px, 4vw, 64px);
+        }
+
+        :root{
+            --primary:#ef66ad;
+            --primary-dark:#ef66ad;
+            --bg-soft:#f5f1fa;
+        }
+        body{
+            font-family:'Segoe UI',Arial,sans-serif;
+            color:#2c2c2c;
+        }
+        a{
+            text-decoration:none;
+        }
+
+        /* Top bar */
+        .top-bar{
+            background:var(--primary);
+            color:#fff;
+            font-size:13px;
+        }
+
+        /* Navbar */
+        .navbar-brand{
+            font-weight:700;
+            letter-spacing:2px;
+            color:var(--primary-dark)!important;
+            line-height:1.1;
+        }
+        .navbar-brand small{
+            display:block;font-size:10px;
+            letter-spacing:4px;font-weight:400;
+            color:#888;
+        }
+        .navbar .nav-link{
+            color:#333;
+            font-weight:500;
+        }
+        .navbar .nav-link:hover{
+            color:var(--primary);
+        }
+        .navbar-icons i{
+            font-size:18px;
+            color:#333;
+            cursor:pointer;
+        }
+        .navbar-icons .badge{
+            font-size:9px;
+        }
+        @media (min-width:992px){
+            .navbar .navbar-nav{
+                margin-left:48px ;
+                margin-right:auto;
+            }
+            .navbar .navbar-icons{
+                margin-left:auto;
+                margin-right:0;
+            }
+        }
+        
+
+        /* Search Dropdown / Collapse */
+        #searchCollapse {
+            position: sticky;
+            top: 76px;
+            z-index: 1020;
+        }
+        #searchCollapse .input-group-text,
+        #searchCollapse .form-control {
+            border-color: #dee2e6;
+        }
+        #searchCollapse .form-control:focus {
+            box-shadow: none;
+            border-color: var(--primary);
+        }
+
+        /* Hero */
+        .hero{
+            background:linear-gradient(135deg,#f3ecfb,#fbeef2);
+            padding:70px 0;
+        }
+        .hero .eyebrow{
+            color:var(--primary);
+            font-weight:600;
+            letter-spacing:2px;
+            font-size:13px;}
+        .hero h1{
+            font-size:2.6rem;
+            font-weight:700;
+            line-height:1.2;}
+        .hero h1 .accent{
+            color:var(--primary);
+            display:block;
+        }
+        .hero p{
+            color:#666;
+            max-width:420px;}
+        .btn-primary-custom{
+            background:var(--primary);
+            border-color:var(--primary);
+            color:#fff;}
+        .btn-primary-custom:hover{
+            background:var(--primary-dark);
+            border-color:var(--primary-dark);
+            color:#fff;
+        }
+        .btn-outline-custom{
+            border:2px solid var(--primary);
+            color:var(--primary);
+            background:transparent;
+        }
+        .btn-outline-custom:hover{
+            background:var(--primary);
+            color:#fff;
+        }
+        .hero-image-box{
+            background:#e9defa;
+            border-radius:16px;
+            height:320px;
+            display:flex;
+            align-items:center;
+            justify-content:center;
+            color:var(--primary-dark);
+            overflow: hidden;
+        }
+        .hero-image-box img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        /* Features bar */
+        .features-card{
+            border-radius:14px;
+            box-shadow:0 10px 30px rgba(0,0,0,.06);
+            margin-top:-45px;position:relative;
+            background:#fff;
+        }
+        .feature-icon{
+            width:46px;
+            height:46px;
+            border-radius:50%;
+            background:var(--bg-soft);
+            display:flex;
+            align-items:center;
+            justify-content:center;
+            color:var(--primary);
+            font-size:20px;
+            flex-shrink:0;
+        }
+
+        /* Section heading */
+        .eyebrow{
+            color:var(--primary);
+            font-weight:600;
+            font-size:13px;
+            letter-spacing:1px;
+        }
+        .view-all-link{
+            color:var(--primary);
+            font-weight:600;
+            font-size:14px;
+        }
+
+        /* Category cards */
+        .cat-card{
+            background:var(--bg-soft);
+            border-radius:14px;
+            padding:24px;
+            min-height:220px;
+            display:flex;
+            flex-direction:column;
+            justify-content:space-between;
+            transition:.25s;
+            color:#2c2c2c;
+        }
+        .cat-card:hover{
+            transform:translateY(-5px);
+            box-shadow:0 10px 24px rgba(139,109,184,.25);
+            color:#2c2c2c;
+        }
+        .cat-icon-placeholder{
+            width:56px;
+            height:56px;
+            border-radius:12px;
+            background:#fff;
+            margin-bottom:14px;
+            overflow: hidden;
+        }
+        .cat-icon-placeholder img{
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        .cat-card small{
+            color:var(--primary);
+            font-weight:600;
+        }
+
+        /* About */
+        .about-section{
+            background:var(--bg-soft);
+        }
+        .about-image-box{
+            background:#e0d3f5;
+            height:340px;
+            border-radius:16px;
+            overflow: hidden;
+        }
+        .about-image-box img{
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        .stat h3{
+            color:var(--primary);
+            font-weight:700;
+        }
+        .stat p{
+            font-size:12px;
+            color:#777;
+            margin-bottom:0;
+        }
+
+        /* Products */
+        .product-img-box{
+            background:var(--bg-soft);
+            height:180px;
+            border-radius:8px 8px 0 0;
+            overflow: hidden;
+        }
+        .product-img-box img{
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+        .card:hover .product-img-box img {
+            transform: scale(1.05);
+        }
+        .price{
+            font-weight:700;
+            color:var(--primary-dark);
+        }
+        .add-cart-btn{
+            width:34px;
+            height:34px;
+            border-radius:50%;
+            background:var(--bg-soft);
+            border:none;
+            color:var(--primary);
+        }
+
+        /* Testimonial */
+        .testimonial-section{
+            background:linear-gradient(135deg,#f3ecfb,#fbeef2);
+        }
+        .testimonial-section p{
+            font-size:1.2rem;
+            font-style:italic;
+            max-width:700px;
+            margin:0 auto;
+        }
+        .testimonial-section .author{
+            font-weight:600;
+            color:var(--primary-dark);
+        }
+
+        /* Blog */
+        .blog-img-box{
+            background:var(--bg-soft);
+            height:180px;
+            border-radius:10px;
+            margin-bottom:14px;
+            overflow: hidden;
+        }
+        .blog-img-box img{
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+        .blog-card:hover .blog-img-box img {
+            transform: scale(1.05);
+        }
+        .blog-card a{
+            color:var(--primary);
+            font-weight:600;
+            font-size:13px;
+        }
+
+        /* Footer */
+        footer{
+            background:var(--primary-dark);
+            color:#fff;
+        }
+        footer h4{
+            font-size:15px;
+            margin-bottom:16px;
+        }
+        footer ul li{
+            font-size:13px;
+            opacity:.85;
+            margin-bottom:8px;
+        }
+        footer .form-control{
+            border-radius:6px 0 0 6px;
+        }
+        footer .btn-newsletter{
+            background:#fff;
+            color:var(--primary-dark);
+            font-weight:600;
+            border-radius:0 6px 6px 0;
+        }
+        .social-icon{
+            width:34px;
+            height:34px;
+            border-radius:50%;
+            background:rgba(255,255,255,.15);
+            display:inline-flex;
+            align-items:center;
+            justify-content:center;
+            margin-right:8px;
+            color:#fff;
+        }
+
+        .auth-modal .nav-pills .nav-link{
+            color:#555;
+            font-weight:600;
+            border-radius:8px;
+        }
+        .auth-modal .nav-pills .nav-link.active{
+            background:var(--primary);
+            color:#fff;
+        }
+        .auth-modal .form-control:focus{
+            box-shadow:none;
+            border-color:var(--primary);
+        }
+        .auth-modal .modal-content{
+            border:0;
+            border-radius:16px;
+        }
+        .navbar-icons .dropdown-toggle::after{display:none;}
+
+        /* Cân bằng khoảng trắng và giúp các lưới tự thích ứng màn hình */
+        body { overflow-x: hidden; }
+        section { scroll-margin-top: 90px; }
+        .hero { padding: clamp(48px, 7vw, 88px) 0; }
+        .hero h1 { font-size: clamp(2rem, 4vw, 3.25rem); }
+        .hero-image-box { min-height: 300px; height: clamp(300px, 36vw, 440px); }
+        .features-card { padding: clamp(20px, 3vw, 32px) !important; }
+        .cat-card { min-height: 220px; height: 100%; }
+        .product-img-box, .blog-img-box { height: 220px; }
+        .product-img-box img, .blog-img-box img { object-position: center; }
+        .about-image-box { min-height: 300px; }
+        .navbar .navbar-nav { align-items: center; }
+        .navbar .nav-link { white-space: nowrap; }
+        .card { border-radius: 12px; overflow: hidden; }
+
+        @media (max-width: 991.98px) {
+            .navbar .navbar-nav { align-items: stretch; gap: 0 !important; padding-top: 12px; }
+            .navbar .nav-link { padding: 8px 0; }
+            .navbar-icons { justify-content: flex-start; padding: 12px 0 4px; }
+            .hero-image-box { height: 360px; }
+        }
+        @media (max-width: 767.98px) {
+            .container { padding-left: 18px; padding-right: 18px; }
+            .top-bar .container { gap: 8px; }
+            .top-bar span:first-child { max-width: 100%; }
+            .hero { padding: 48px 0 64px; }
+            .hero .row { gap: 28px !important; }
+            .hero-image-box { height: 300px; min-height: 0; }
+            .hero .d-flex.gap-3 { flex-wrap: wrap; }
+            .features-card { margin-top: -28px; }
+            .features-card .row { row-gap: 20px !important; }
+            .features-card .col-md-3 { width: 50%; }
+            .cat-card { padding: 18px; min-height: 205px; }
+            .product-img-box, .blog-img-box { height: 180px; }
+            .about-image-box { height: 280px; min-height: 0; }
+            .stat h3 { font-size: 1.35rem; }
+            .section-heading h2, h2.fw-bold { font-size: 1.55rem; }
+        }
+        @media (max-width: 420px) {
+            .container { padding-left: 14px; padding-right: 14px; }
+            .top-bar { font-size: 11px; }
+            .features-card .col-md-3 { width: 100%; }
+            .cat-card { padding: 14px; min-height: 190px; }
+            .cat-card h6 { font-size: .9rem; }
+            .product-img-box { height: 150px; }
+            .product-card .card-body { padding: 12px; }
+        }
+        </style>
+    </head>
+    <body>
+
+        <!-- Top bar -->
+        <div class="top-bar py-2">
+        <div class="container d-flex justify-content-between small">
+            <span><i class="bi bi-truck me-1"></i>Miễn phí vận chuyển cho đơn hàng trên 1.000.000đ</span>
+            <span class="d-none d-md-block">Theo dõi đơn hàng | Hệ thống cửa hàng | Hỗ trợ</span>
+        </div>
+        </div>
+
+        <!-- Navbar -->
+        <nav class="navbar navbar-expand-lg navbar-light bg-white sticky-top shadow-sm py-3">
+        <div class="container">
+            <a class="navbar-brand" href="#">IUH<small>BEAUTY</small></a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu">
+            <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navMenu">
+            <ul class="navbar-nav mx-auto gap-lg-4">
+                <li class="nav-item"><a class="nav-link active" href="#">Home</a></li>
+                <li class="nav-item"><a class="nav-link" href="#categories">Shop</a></li>
+                <li class="nav-item"><a class="nav-link" href="#">Makeup</a></li>
+                <li class="nav-item"><a class="nav-link" href="#">Skincare</a></li>
+                <li class="nav-item"><a class="nav-link" href="#">Haircare</a></li>
+                <li class="nav-item"><a class="nav-link" href="#">About Us</a></li>
+                <li class="nav-item"><a class="nav-link" href="#">Blog</a></li>
+                <li class="nav-item"><a class="nav-link" href="#">Contact Us</a></li>
+            </ul>
+            <div class="navbar-icons d-flex align-items-center gap-3 mt-3 mt-lg-0">
+                <!-- Nút toggle thanh tìm kiếm -->
+                <button class="btn p-0 border-0 bg-transparent" type="button" data-bs-toggle="collapse" data-bs-target="#searchCollapse" aria-expanded="false" aria-controls="searchCollapse" title="Tìm kiếm">
+                    <i class="bi bi-search"></i>
+                </button>
+
+                <!-- Chưa đăng nhập -->
+                <button id="loginIconBtn" class="btn p-0 border-0 bg-transparent" type="button" title="Đăng nhập / Đăng ký">
+                    <i class="bi bi-person"></i>
+                </button>
+
+                <!-- Đã đăng nhập -->
+                <div class="dropdown d-none" id="userDropdown">
+                    <button class="btn p-0 border-0 bg-transparent dropdown-toggle d-flex align-items-center gap-1" data-bs-toggle="dropdown" type="button">
+                        <i class="bi bi-person-check-fill" style="color:var(--primary)"></i>
+                        <small id="userNameLabel" class="fw-semibold"></small>
+                    </button>
+                    <ul class="dropdown-menu dropdown-menu-end">
+                        <li><a class="dropdown-item" href="#"><i class="bi bi-person me-2"></i>Tài khoản của tôi</a></li>
+                        <li><a class="dropdown-item" href="#"><i class="bi bi-receipt me-2"></i>Đơn hàng</a></li>
+                        <li><hr class="dropdown-divider"></li>
+                        <li><a class="dropdown-item text-danger" href="#" id="logoutBtn"><i class="bi bi-box-arrow-right me-2"></i>Đăng xuất</a></li>
+                    </ul>
+                </div>
+
+                <span class="position-relative">
+                    <i class="bi bi-bag"></i>
+                    <span class="badge bg-danger rounded-pill position-absolute top-0 start-100 translate-middle" id="cartCount">0</span>
+                </span>
+            </div>
+            </div>
+        </div>
+        </nav>
+
+        <!-- Thanh tìm kiếm mở rộng (Collapse) -->
+        <div class="collapse bg-white border-bottom shadow-sm" id="searchCollapse">
+            <div class="container py-3">
+                <form action="#" method="GET" class="d-flex align-items-center justify-content-center gap-2 mx-auto" style="max-width: 650px;">
+                    <div class="input-group">
+                        <span class="input-group-text bg-light border-end-0 text-muted">
+                            <i class="bi bi-search"></i>
+                        </span>
+                        <input type="text" class="form-control bg-light border-start-0 ps-0" placeholder="Tìm kiếm mỹ phẩm, sản phẩm dưỡng da, son môi..." aria-label="Tìm kiếm">
+                        <button class="btn btn-primary-custom px-4" type="submit">Tìm</button>
+                    </div>
+                    <button type="button" class="btn-close ms-2" data-bs-toggle="collapse" data-bs-target="#searchCollapse" aria-label="Đóng"></button>
+                </form>
+            </div>
+        </div>
+
+        <!-- Hero -->
+        <section class="hero">
+        <div class="container">
+            <div class="row align-items-center g-5">
+            <div class="col-lg-6">
+                <div class="eyebrow">MỸ PHẨM SẠCH. CHÍNH LÀ BẠN.</div>
+                <h1 class="my-3">Tỏa Sáng Tự Nhiên.<span class="accent">Rạng Rỡ Tự Tin.</span></h1>
+                <p class="mb-4">Giải pháp làm đẹp hiệu quả cao, chiết xuất từ thành phần sạch, an toàn cho mọi loại da.</p>
+                <div class="d-flex gap-3">
+                <a href="#bestsellers" class="btn btn-primary-custom btn-buy px-4 py-2 rounded-2 fw-semibold">Mua Ngay</a>
+                <a href="#categories" class="btn btn-outline-custom px-4 py-2 rounded-2 fw-semibold">Khám Phá Sản Phẩm</a>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="hero-image-box">
+                    <img src="./img/BST-MP-01.jpg" alt="Hero Image" onerror="this.src='./img/about-elora.jpg'">
+                </div>
+            </div>
+            </div>
+        </div>
+        </section>
+
+        <!-- Features -->
+        <div class="container">
+        <div class="features-card p-4">
+            <div class="row g-4">
+            <div class="col-md-3 d-flex gap-3 align-items-center">
+                <div class="feature-icon"><i class="bi bi-leaf"></i></div>
+                <div><h6 class="mb-0">Thành Phần Sạch</h6><small class="text-muted">An toàn, không độc hại</small></div>
+            </div>
+            <div class="col-md-3 d-flex gap-3 align-items-center">
+                <div class="feature-icon"><i class="bi bi-heart"></i></div>
+                <div><h6 class="mb-0">Không Thử Nghiệm Trên ĐV</h6><small class="text-muted">Nhân đạo & bền vững</small></div>
+            </div>
+            <div class="col-md-3 d-flex gap-3 align-items-center">
+                <div class="feature-icon"><i class="bi bi-clipboard2-pulse"></i></div>
+                <div><h6 class="mb-0">Đã Kiểm Nghiệm Da Liễu</h6><small class="text-muted">Phù hợp mọi loại da</small></div>
+            </div>
+            <div class="col-md-3 d-flex gap-3 align-items-center">
+                <div class="feature-icon"><i class="bi bi-globe"></i></div>
+                <div><h6 class="mb-0">Làm Đẹp Bền Vững</h6><small class="text-muted">Thân thiện môi trường</small></div>
+            </div>
+            </div>
+        </div>
+        </div>
+
+        <!-- Categories -->
+        <section class="py-5" id="categories">
+        <div class="container">
+            <div class="d-flex justify-content-between align-items-end mb-4 flex-wrap gap-2">
+            <div>
+                <div class="eyebrow">MUA THEO DANH MỤC</div>
+                <h2 class="fw-bold mt-1">Dành Riêng Cho Vẻ Đẹp Của Bạn</h2>
+            </div>
+            <a href="#" class="view-all-link">Xem tất cả danh mục <i class="bi bi-arrow-right"></i></a>
+            </div>
+            <div class="row g-3">
+            <div class="col-6 col-md-4 col-lg">
+                <a href="/skincare.html" class="cat-card d-block text-decoration-none">
+                <div class="cat-icon-placeholder">
+                    <img src="./img/cat-skincare.jpg" alt="Chăm Sóc Da">
+                </div>
+                <div><h6>Chăm Sóc Da</h6><small class="text-muted d-block">Nuôi dưỡng & Rạng rỡ</small></div>
+                <small>Xem thêm <i class="bi bi-arrow-right"></i></small>
+                </a>
+            </div>
+            <div class="col-6 col-md-4 col-lg">
+                <a href="/makeup.html" class="cat-card d-block text-decoration-none">
+                <div class="cat-icon-placeholder">
+                    <img src="./img/cat-makeup.jpg" alt="Trang Điểm">
+                </div>
+                <div><h6>Trang Điểm</h6><small class="text-muted d-block">Tôn lên & Thể hiện</small></div>
+                <small>Xem thêm <i class="bi bi-arrow-right"></i></small>
+                </a>
+            </div>
+            <div class="col-6 col-md-4 col-lg">
+                <a href="/haircare.html" class="cat-card d-block text-decoration-none">
+                <div class="cat-icon-placeholder">
+                    <img src="./img/cat-haircare.jpg" alt="Chăm Sóc Tóc">
+                </div>
+                <div><h6>Chăm Sóc Tóc</h6><small class="text-muted d-block">Chắc khỏe & Bóng mượt</small></div>
+                <small>Xem thêm <i class="bi bi-arrow-right"></i></small>
+                </a>
+            </div>
+            <div class="col-6 col-md-4 col-lg">
+                <a href="/bodycare.html" class="cat-card d-block text-decoration-none">
+                <div class="cat-icon-placeholder">
+                    <img src="./img/cat-bodycare.jpg" alt="Chăm Sóc Cơ Thể">
+                </div>
+                <div><h6>Chăm Sóc Cơ Thể</h6><small class="text-muted d-block">Nâng niu & Bảo vệ</small></div>
+                <small>Xem thêm <i class="bi bi-arrow-right"></i></small>
+                </a>
+            </div>
+            <div class="col-6 col-md-4 col-lg">
+                <a href="/giftsets.html" class="cat-card d-block text-decoration-none">
+                <div class="cat-icon-placeholder">
+                    <img src="./img/cat-giftsets.jpg" alt="Bộ Quà Tặng">
+                </div>
+                <div><h6>Bộ Quà Tặng</h6><small class="text-muted d-block">Trọn vẹn yêu thương</small></div>
+                <small>Xem thêm <i class="bi bi-arrow-right"></i></small>
+                </a>
+            </div>
+            </div>
+        </div>
+        </section>
+
+        <!-- About -->
+        <section class="about-section py-5">
+        <div class="container">
+            <div class="row align-items-center g-5">
+            <div class="col-lg-6">
+                <div class="about-image-box">
+                    <img src="./img/about-elora.jpg" alt="Về Elora Beauty">
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="eyebrow">VỀ IUH BEAUTY</div>
+                <h2 class="fw-bold my-3">Làm Đẹp Sạch. Tự Tin Thật Sự.</h2>
+                <p class="text-muted mb-4">Tại IUH Beauty, chúng tôi tin rằng vẻ đẹp nên chân thật, sạch và trao quyền. Công thức của chúng tôi kết hợp giữa thiên nhiên và khoa học để giúp bạn đẹp hơn, tự tin hơn mỗi ngày.</p>
+                <div class="row g-3">
+                <div class="col-3 stat"><h3>98%</h3><p>Thành phần tự nhiên</p></div>
+                <div class="col-3 stat"><h3>50.000+</h3><p>Công thức chuyên biệt</p></div>
+                <div class="col-3 stat"><h3>10.000K+</h3><p>Khách hàng hài lòng</p></div>
+                <div class="col-3 stat"><h3>300+</h3><p>Quốc gia phân phối</p></div>
+                </div>
+            </div>
+            </div>
+        </div>
+        </section>
+
+        <!-- Bestsellers -->
+        <section class="py-5" id="bestsellers">
+        <div class="container">
+            <div class="d-flex justify-content-between align-items-end mb-4 flex-wrap gap-2">
+            <div>
+                <div class="eyebrow">SẢN PHẨM BÁN CHẠY</div>
+                <h2 class="fw-bold mt-1">Được Hàng Nghìn Người Yêu Thích</h2>
+            </div>
+            <a href="#" class="view-all-link">Xem tất cả sản phẩm <i class="bi bi-arrow-right"></i></a>
+            </div>
+            <div class="row g-4">
+            <div class="col-6 col-md-4 col-lg">
+                <div class="card border-0 shadow-sm h-100">
+                <div class="product-img-box">
+                    <img src="./img/prod-serum.jpg" alt="Serum Dưỡng Sáng">
+                </div>
+                <div class="card-body">
+                    <h6 class="card-title">Serum Dưỡng Sáng</h6>
+                    <div class="text-warning small mb-2">★★★★★ <span class="text-muted">(124)</span></div>
+                    <div class="d-flex justify-content-between align-items-center">
+                    <span class="price">153.650.750.000 VNĐ</span>
+                    <button class="add-cart-btn"><i class="bi bi-cart"></i></button>
+                    </div>
+                </div>
+                </div>
+            </div>
+            <div class="col-6 col-md-4 col-lg">
+                <div class="card border-0 shadow-sm h-100">
+                <div class="product-img-box">
+                    <img src="./img/Nuoc_Buoi_Moi_Edit_tach_nen_Size_Web_ef5c4fc93b.jpg" alt="Kem Dưỡng Ẩm">
+                </div>
+                <div class="card-body">
+                    <h6 class="card-title">Kem Dưỡng Ẩm</h6>
+                    <div class="text-warning small mb-2">★★★★☆ <span class="text-muted">(99)</span></div>
+                    <div class="d-flex justify-content-between align-items-center">
+                    <span class="price">923.980.650.000 VNĐ</span>
+                    <button class="add-cart-btn"><i class="bi bi-cart"></i></button>
+                    </div>
+                </div>
+                </div>
+            </div>
+            <div class="col-6 col-md-4 col-lg">
+                <div class="card border-0 shadow-sm h-100">
+                <div class="product-img-box">
+                    <img src="./img/prod-cleanser.jpg" alt="Sữa Rửa Mặt">
+                </div>
+                <div class="card-body">
+                    <h6 class="card-title">Sữa Rửa Mặt</h6>
+                    <div class="text-warning small mb-2">★★★★☆ <span class="text-muted">(86)</span></div>
+                    <div class="d-flex justify-content-between align-items-center">
+                    <span class="price">724.990.420.000 VNĐ</span>
+                    <button class="add-cart-btn"><i class="bi bi-cart"></i></button>
+                    </div>
+                </div>
+                </div>
+            </div>
+            <div class="col-6 col-md-4 col-lg">
+                <div class="card border-0 shadow-sm h-100">
+                <div class="product-img-box">
+                    <img src="./img/prod-lipstick.jpg" alt="Son Lì Mịn">
+                </div>
+                <div class="card-body">
+                    <h6 class="card-title">Son Lì Mịn</h6>
+                    <div class="text-warning small mb-2">★★★★☆ <span class="text-muted">(76)</span></div>
+                    <div class="d-flex justify-content-between align-items-center">
+                    <span class="price">875.879.380.000 VNĐ</span>
+                    <button class="add-cart-btn"><i class="bi bi-cart"></i></button>
+                    </div>
+                </div>
+                </div>
+            </div>
+            <div class="col-6 col-md-4 col-lg">
+                <div class="card border-0 shadow-sm h-100">
+                <div class="product-img-box">
+                    <img src="./img/prod-vitaminc.jpg" alt="Serum Vitamin C">
+                </div>
+                <div class="card-body">
+                    <h6 class="card-title">Serum Vitamin C</h6>
+                    <div class="text-warning small mb-2">★★★★☆ <span class="text-muted">(112)</span></div>
+                    <div class="d-flex justify-content-between align-items-center">
+                    <span class="price">635.934.790.000 VNĐ</span>
+                    <button class="add-cart-btn"><i class="bi bi-cart"></i></button>
+                    </div>
+                </div>
+                </div>
+            </div>
+            </div>
+        </div>
+        </section>
+
+        <!-- Testimonial -->
+        <section class="testimonial-section py-5 text-center">
+        <div class="container">
+            <p class="mb-3">"Hãy làm những điều mà các cưng thích trên trang web của chụy đã tạo cho các cưng xem"</p>
+            <div class="author">— Nguyễn Tuấn Khôi</div>
+        </div>
+        </section>
+
+        <!-- Blog -->
+        <section class="py-5">
+        <div class="container">
+            <div class="d-flex justify-content-between align-items-end mb-4 flex-wrap gap-2">
+            <div>
+                <div class="eyebrow">TỪ TRANG NHẬT KÝ</div>
+                <h2 class="fw-bold mt-1">Mẹo, Xu Hướng & Kiến Thức</h2>
+            </div>
+            <a href="#" class="view-all-link">Xem tất cả bài viết <i class="bi bi-arrow-right"></i></a>
+            </div>
+            <div class="row g-4">
+            <div class="col-md-4 blog-card">
+                <div class="blog-img-box">
+                    <img src="./img/blog-1.jpg" alt="5 Thành Phần Da Bạn Sẽ Muốn Có">
+                </div>
+                <div class="small text-muted mb-1">16/05/2024</div>
+                <h6>5 Thành Phần Da Bạn Sẽ Muốn Có</h6>
+                <a href="#">Đọc thêm <i class="bi bi-arrow-right"></i></a>
+            </div>
+            <div class="col-md-4 blog-card">
+                <div class="blog-img-box">
+                    <img src="./img/blog-2.jpg" alt="Chăm Sóc Da Sáng vs Tối">
+                </div>
+                <div class="small text-muted mb-1">10/05/2024</div>
+                <h6>Chăm Sóc Da Sáng vs Tối: Khác Nhau Gì?</h6>
+                <a href="#">Đọc thêm <i class="bi bi-arrow-right"></i></a>
+            </div>
+            <div class="col-md-4 blog-card">
+                <div class="blog-img-box">
+                    <img src="./img/blog-3.jpg" alt="Cách Xây Dựng Quy Trình Làm Đẹp Bền Vững">
+                </div>
+                <div class="small text-muted mb-1">03/05/2024</div>
+                <h6>Cách Xây Dựng Quy Trình Làm Đẹp Bền Vững</h6>
+                <a href="#">Đọc thêm <i class="bi bi-arrow-right"></i></a>
+            </div>
+            </div>
+        </div>
+        </section>
+
+        <!-- Footer -->
+        <footer class="pt-5 pb-3">
+        <div class="container">
+            <div class="row g-4 mb-4">
+            <div class="col-lg-4 col-md-6">
+                <h4>Luôn Rạng Rỡ</h4>
+                <p class="small opacity-75 mb-3">Đăng ký nhận bản tin và nhận ưu đãi 10% cho đơn đầu tiên.</p>
+                <div class="input-group mb-3" style="max-width:320px;">
+                <input type="email" class="form-control" placeholder="Email của bạn">
+                <button class="btn btn-newsletter">Đăng ký</button>
+                </div>
+                <div>
+                <span class="social-icon"><i class="bi bi-instagram"></i></span>
+                <span class="social-icon"><i class="bi bi-facebook"></i></span>
+                <span class="social-icon"><i class="bi bi-youtube"></i></span>
+                <span class="social-icon"><i class="bi bi-tiktok"></i></span>
+                </div>
+            </div>
+            <div class="col-lg-2 col-6 col-md-3">
+                <h4>Cửa Hàng</h4>
+                <ul class="list-unstyled">
+                <li>Tất cả sản phẩm</li>
+                <li>Chăm sóc da</li>
+                <li>Trang điểm</li>
+                <li>Chăm sóc tóc</li>
+                </ul>
+            </div>
+            <div class="col-lg-2 col-6 col-md-3">
+                <h4>Khách Hàng</h4>
+                <ul class="list-unstyled">
+                <li>Theo dõi đơn hàng</li>
+                <li>Vận chuyển & Giao hàng</li>
+                <li>Đổi trả & Hoàn tiền</li>
+                <li>Câu hỏi thường gặp</li>
+                </ul>
+            </div>
+            <div class="col-lg-2 col-6 col-md-3">
+                <h4>Công Ty</h4>
+                <ul class="list-unstyled">
+                <li>Về chúng tôi</li>
+                <li>Thành phần</li>
+                <li>Tuyển dụng</li>
+                </ul>
+            </div>
+            <div class="col-lg-2 col-6 col-md-3">
+                <h4>Liên Hệ</h4>
+                <ul class="list-unstyled">
+                <li><i class="bi bi-telephone me-1"></i> 1900 1234</li>
+                <li><i class="bi bi-envelope me-1"></i> hello@iuhbeauty.vn</li>
+                <li><i class="bi bi-geo-alt me-1"></i> Đại học Công nghiệp TP.HCM</li>
+                </ul>
+            </div>
+            </div>
+            <div class="text-center small opacity-75 border-top pt-3">© 2026 IUH Beauty. Bản quyền của Nguyễn Tuấn Khôi.</div>
+        </div>
+        </footer>
+
+        <!-- Auth Modal -->
+        <div class="modal fade auth-modal" id="authModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content p-2">
+            <div class="modal-header border-0 pb-0">
+                <div class="w-100 text-center">
+                    <h4 class="fw-bold mb-1" style="color:var(--primary);letter-spacing:2px;">IUH BEAUTY</h4>
+                    <small class="text-muted" id="authNotice">Chào mừng bạn trở lại!</small>
+                </div>
+                <button type="button" class="btn-close position-absolute top-0 end-0 m-3" data-bs-dismiss="modal" aria-label="Đóng"></button>
+            </div>
+            <div class="modal-body">
+                <ul class="nav nav-pills nav-fill mb-3" role="tablist">
+                <li class="nav-item"><button class="nav-link active" id="tabLogin" data-bs-toggle="pill" data-bs-target="#paneLogin" type="button">Đăng nhập</button></li>
+                <li class="nav-item"><button class="nav-link" id="tabRegister" data-bs-toggle="pill" data-bs-target="#paneRegister" type="button">Đăng ký</button></li>
+                </ul>
+
+                <div class="tab-content">
+                <!-- Đăng nhập -->
+                <div class="tab-pane fade show active" id="paneLogin">
+                    <form id="loginForm" novalidate>
+                    <div class="alert alert-danger py-2 small d-none" id="loginError"></div>
+                    <div class="mb-3">
+                        <label class="form-label small fw-semibold">Email</label>
+                        <input type="email" class="form-control" id="loginEmail" placeholder="email@example.com" required>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label small fw-semibold">Mật khẩu</label>
+                        <input type="password" class="form-control" id="loginPassword" placeholder="••••••" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary-custom w-100 py-2 fw-semibold">Đăng nhập</button>
+                    <p class="text-center small text-muted mt-3 mb-0">Chưa có tài khoản?
+                        <a href="#" id="goRegister" style="color:var(--primary);font-weight:600;">Đăng ký ngay</a>
+                    </p>
+                    </form>
+                </div>
+
+                <!-- Đăng ký -->
+                <div class="tab-pane fade" id="paneRegister">
+                    <form id="registerForm" novalidate>
+                    <div class="alert alert-danger py-2 small d-none" id="registerError"></div>
+                    <div class="mb-3">
+                        <label class="form-label small fw-semibold">Họ và tên</label>
+                        <input type="text" class="form-control" id="regName" placeholder="Nguyễn Văn A" required>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label small fw-semibold">Email</label>
+                        <input type="email" class="form-control" id="regEmail" placeholder="email@example.com" required>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label small fw-semibold">Mật khẩu</label>
+                        <input type="password" class="form-control" id="regPassword" placeholder="Tối thiểu 1.000 ký tự" required>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label small fw-semibold">Nhập lại mật khẩu</label>
+                        <input type="password" class="form-control" id="regConfirm" placeholder="••••••" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary-custom w-100 py-2 fw-semibold">Tạo tài khoản</button>
+                    <p class="text-center small text-muted mt-3 mb-0">Đã có tài khoản?
+                        <a href="#" id="goLogin" style="color:var(--primary);font-weight:600;">Đăng nhập</a>
+                    </p>
+                    </form>
+                </div>
+                </div>
+            </div>
+            </div>
+        </div>
+        </div>
+
+        <!-- Bootstrap JS Bundle -->
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+        <!-- Script tự động mở ô tìm kiếm -->
+        <script>
+        const searchCollapse = document.getElementById('searchCollapse');
+        if (searchCollapse) {
+            searchCollapse.addEventListener('shown.bs.collapse', function () {
+            const searchInput = this.querySelector('input');
+            if (searchInput) searchInput.focus();
+            });
+        }
+        </script>
+
+        <!-- Script đăng nhập / đăng ký -->
+        <script>
+        (function () {
+            const USERS_KEY = 'iuh_users';
+            const SESSION_KEY = 'iuh_current_user';
+
+            const authModalEl = document.getElementById('authModal');
+            const authModal = new bootstrap.Modal(authModalEl);
+            const authNotice = document.getElementById('authNotice');
+            const loginIconBtn = document.getElementById('loginIconBtn');
+            const userDropdown = document.getElementById('userDropdown');
+            const userNameLabel = document.getElementById('userNameLabel');
+            const cartCount = document.getElementById('cartCount');
+
+            let pendingAction = null;
+
+            const getUsers = () => JSON.parse(localStorage.getItem(USERS_KEY) || '[]');
+            const saveUsers = (u) => localStorage.setItem(USERS_KEY, JSON.stringify(u));
+            const getCurrent = () => JSON.parse(localStorage.getItem(SESSION_KEY) || 'null');
+            const isLoggedIn = () => !!getCurrent();
+
+            function showError(id, msg) {
+                const el = document.getElementById(id);
+                el.textContent = msg;
+                el.classList.remove('d-none');
+            }
+            function hideErrors() {
+                document.getElementById('loginError').classList.add('d-none');
+                document.getElementById('registerError').classList.add('d-none');
+            }
+
+            function updateAuthUI() {
+                const user = getCurrent();
+                if (user) {
+                    loginIconBtn.classList.add('d-none');
+                    userDropdown.classList.remove('d-none');
+                    userNameLabel.textContent = user.name.split(' ').slice(-1)[0];
+                } else {
+                    loginIconBtn.classList.remove('d-none');
+                    userDropdown.classList.add('d-none');
+                }
+            }
+
+            function openAuth(tab, notice) {
+                hideErrors();
+                authNotice.textContent = notice || 'Chào mừng bạn trở lại!';
+                bootstrap.Tab.getOrCreateInstance(
+                    document.getElementById(tab === 'register' ? 'tabRegister' : 'tabLogin')
+                ).show();
+                authModal.show();
+            }
+
+            function onLoginSuccess(user) {
+                localStorage.setItem(SESSION_KEY, JSON.stringify(user));
+                updateAuthUI();
+                authModal.hide();
+                if (pendingAction) {
+                    const action = pendingAction;
+                    pendingAction = null;
+                    action();
+                }
+            }
+
+            loginIconBtn.addEventListener('click', () => openAuth('login'));
+
+            // Chuyển tab bằng link
+            document.getElementById('goRegister').addEventListener('click', e => { e.preventDefault(); hideErrors(); bootstrap.Tab.getOrCreateInstance(document.getElementById('tabRegister')).show(); });
+            document.getElementById('goLogin').addEventListener('click', e => { e.preventDefault(); hideErrors(); bootstrap.Tab.getOrCreateInstance(document.getElementById('tabLogin')).show(); });
+
+            // Đăng ký
+            document.getElementById('registerForm').addEventListener('submit', function (e) {
+                e.preventDefault();
+                hideErrors();
+                const name = document.getElementById('regName').value.trim();
+                const email = document.getElementById('regEmail').value.trim().toLowerCase();
+                const pass = document.getElementById('regPassword').value;
+                const confirm = document.getElementById('regConfirm').value;
+
+                if (!name || !email || !pass) return showError('registerError', 'Vui lòng nhập đầy đủ thông tin.');
+                if (!/^\S+@\S+\.\S+$/.test(email)) return showError('registerError', 'Email không hợp lệ.');
+                if (pass.length < 8) return showError('registerError', 'Mật khẩu phải có ít nhất 8 ký tự.');
+                if (pass !== confirm) return showError('registerError', 'Mật khẩu nhập lại không khớp.');
+
+                const users = getUsers();
+                if (users.some(u => u.email === email)) return showError('registerError', 'Email này đã được đăng ký.');
+
+                const newUser = { name, email, password: pass };
+                users.push(newUser);
+                saveUsers(users);
+                this.reset();
+                onLoginSuccess({ name, email }); // đăng ký xong tự đăng nhập
+            });
+
+            // Đăng nhập
+            document.getElementById('loginForm').addEventListener('submit', function (e) {
+                e.preventDefault();
+                hideErrors();
+                const email = document.getElementById('loginEmail').value.trim().toLowerCase();
+                const pass = document.getElementById('loginPassword').value;
+
+                if (!email || !pass) return showError('loginError', 'Vui lòng nhập email và mật khẩu.');
+                const user = getUsers().find(u => u.email === email && u.password === pass);
+                if (!user) return showError('loginError', 'Email hoặc mật khẩu không đúng.');
+
+                this.reset();
+                onLoginSuccess({ name: user.name, email: user.email });
+            });
+
+            // Đăng xuất
+            document.getElementById('logoutBtn').addEventListener('click', function (e) {
+                e.preventDefault();
+                localStorage.removeItem(SESSION_KEY);
+                updateAuthUI();
+            });
+
+            // Không cho mua nếu chưa đăng nhập
+            document.querySelectorAll('.btn-buy, .add-cart-btn').forEach(btn => {
+                btn.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    const isAddCart = this.classList.contains('add-cart-btn');
+
+                    const doAction = () => {
+                        if (isAddCart) {
+                            cartCount.textContent = (parseInt(cartCount.textContent) || 0) + 1;
+                            cartCount.classList.remove('d-none');
+                        } else {
+                            document.getElementById('bestsellers').scrollIntoView({ behavior: 'smooth' });
+                        }
+                    };
+
+                    if (!isLoggedIn()) {
+                        pendingAction = doAction;
+                        openAuth('login', 'Đéo cho mua hàng khi chưa đăng nhập hoặc đăng ký để mua hàng. Đăng ký tài khoản và mua hàng lẹ cho chụy nha!');
+                        return;
+                    }
+                    doAction();
+                });
+            });
+
+            // Xóa hành động chờ nếu người dùng đóng modal
+            authModalEl.addEventListener('hidden.bs.modal', () => { pendingAction = null; });
+
+            updateAuthUI();
+        })();
+        </script>
+    </body>
+</html>
