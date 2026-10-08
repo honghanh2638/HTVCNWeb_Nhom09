@@ -87,4 +87,5 @@ https://fontawesome.com/icons/classic/solid/user?pc=rgba%28255%2C%20255%2C%20255
 - Tất cả các file báo cáo (file word và file ppt) sẽ được lưu trong thư mục BaoCao
 - Các file css và js sẽ được lưu trữ trong file nén Bootstrap-5.2.3-dist.zip (bootstrap phiên bản 5.2.3 nhé và trong file nén đã bao gồm popper.js và jquery.js). Nếu sử dụng đến bootstrap, hãy tải và giải nén để sử dụng.
 - code html và các hình ảnh sử dụng trong trang web mọi người push lên thư mục html và thư mục image nhé.
+- file code(.html) lưu vào thư mục html nha mọi người.
 
