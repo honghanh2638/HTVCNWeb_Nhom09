@@ -1,0 +1,453 @@
+
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IUH BEAUTY - Đăng ký thành viên</title>
+
+    <!-- Bootstrap giống trang chủ -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
+
+    <style>
+        :root {
+            --primary: #ef66ad;
+            --primary-dark: #d94d96;
+            --bg-soft: #f5f1fa;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Arial, sans-serif;
+            color: #2c2c2c;
+            background: linear-gradient(135deg, #f3ecfb, #fbeef2);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        a {
+            text-decoration: none;
+        }
+
+        .navbar-brand {
+            font-weight: 700;
+            letter-spacing: 2px;
+            color: var(--primary) !important;
+            line-height: 1.1;
+        }
+
+        .navbar-brand small {
+            display: block;
+            font-size: 10px;
+            letter-spacing: 4px;
+            color: #888;
+            font-weight: 400;
+        }
+
+        .navbar .nav-link {
+            color: #333;
+            font-weight: 500;
+        }
+
+        .navbar .nav-link:hover {
+            color: var(--primary);
+        }
+
+        .register-wrapper {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 45px 15px;
+        }
+
+        .register-card {
+            width: 100%;
+            max-width: 560px;
+            background: #fff;
+            border-radius: 18px;
+            padding: 35px;
+            box-shadow: 0 10px 35px rgba(0, 0, 0, 0.08);
+        }
+
+        .register-icon {
+            width: 65px;
+            height: 65px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 15px;
+            border-radius: 50%;
+            background: var(--bg-soft);
+            color: var(--primary);
+            font-size: 28px;
+        }
+
+        .register-title {
+            color: var(--primary);
+            font-weight: 700;
+            letter-spacing: 1px;
+        }
+
+        .form-label {
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        .form-control {
+            padding: 11px 13px;
+            border-radius: 8px;
+        }
+
+        .form-control:focus {
+            border-color: var(--primary);
+            box-shadow: 0 0 0 0.2rem rgba(239, 102, 173, 0.15);
+        }
+
+        .btn-register {
+            width: 100%;
+            padding: 12px;
+            border: 0;
+            border-radius: 8px;
+            background: var(--primary);
+            color: #fff;
+            font-weight: 600;
+        }
+
+        .btn-register:hover {
+            background: var(--primary-dark);
+            color: #fff;
+        }
+
+        .text-pink {
+            color: var(--primary);
+        }
+
+        .error-text {
+            color: #dc3545;
+            font-size: 12px;
+            margin-top: 5px;
+        }
+
+        .success-box {
+            background: #f0fff4;
+            border: 1px solid #b7e4c7;
+            border-radius: 10px;
+            padding: 20px;
+        }
+
+        footer {
+            background: var(--primary);
+            color: white;
+            text-align: center;
+            padding: 18px 10px;
+            font-size: 13px;
+        }
+
+        @media (max-width: 576px) {
+            .register-card {
+                padding: 25px 20px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Thanh điều hướng -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm py-3">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">
+                IUH
+                <small>BEAUTY</small>
+            </a>
+
+            <button class="navbar-toggler" type="button"
+                data-bs-toggle="collapse" data-bs-target="#navMenu"
+                aria-controls="navMenu" aria-expanded="false"
+                aria-label="Mở menu">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navMenu">
+                <ul class="navbar-nav ms-auto gap-lg-3">
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html">Trang chủ</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active text-pink" href="dangky.html">
+                            Đăng ký thành viên
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Nội dung đăng ký -->
+    <main class="register-wrapper">
+        <div class="register-card">
+
+            <div class="text-center mb-4">
+                <div class="register-icon">
+                    <i class="bi bi-person-plus"></i>
+                </div>
+
+                <h3 class="register-title">ĐĂNG KÝ THÀNH VIÊN</h3>
+
+                <p class="text-muted small mb-0">
+                    Tạo tài khoản để trải nghiệm IUH BEAUTY
+                </p>
+            </div>
+
+            <!-- Form đăng ký -->
+            <form id="registerForm" novalidate>
+
+                <div class="mb-3">
+                    <label for="regName" class="form-label">
+                        Họ và tên <span class="text-danger">*</span>
+                    </label>
+                    <input type="text" class="form-control" id="regName"
+                        placeholder="Ví dụ: Nguyễn Văn A"
+                        maxlength="100" autocomplete="name">
+                    <div class="error-text" id="nameError"></div>
+                </div>
+
+                <div class="mb-3">
+                    <label for="regEmail" class="form-label">
+                        Email <span class="text-danger">*</span>
+                    </label>
+                    <input type="email" class="form-control" id="regEmail"
+                        placeholder="email@example.com"
+                        autocomplete="email">
+                    <div class="error-text" id="emailError"></div>
+                </div>
+
+                <div class="mb-3">
+                    <label for="regPassword" class="form-label">
+                        Mật khẩu <span class="text-danger">*</span>
+                    </label>
+                    <input type="password" class="form-control" id="regPassword"
+                        placeholder="Nhập mật khẩu tối thiểu 8 ký tự"
+                        minlength="8" autocomplete="new-password">
+                    <div class="error-text" id="passwordError"></div>
+                </div>
+
+                <div class="mb-4">
+                    <label for="regConfirm" class="form-label">
+                        Nhập lại mật khẩu <span class="text-danger">*</span>
+                    </label>
+                    <input type="password" class="form-control" id="regConfirm"
+                        placeholder="Nhập lại mật khẩu"
+                        autocomplete="new-password">
+                    <div class="error-text" id="confirmError"></div>
+                </div>
+
+                <div class="alert alert-danger py-2 small d-none"
+                    id="registerError" role="alert"></div>
+
+                <button type="submit" class="btn btn-register">
+                    <i class="bi bi-person-check me-1"></i>
+                    Tạo tài khoản
+                </button>
+
+                <p class="text-center small text-muted mt-4 mb-0">
+                    Đã có tài khoản?
+                    <a href="index.html" class="text-pink fw-semibold">
+                        Đăng nhập
+                    </a>
+                </p>
+            </form>
+
+            <!-- Hiện thông tin khi đăng ký thành công -->
+            <div id="successBox" class="success-box mt-4 d-none" role="status">
+                <h5 class="text-success">
+                    <i class="bi bi-check-circle-fill me-1"></i>
+                    Đăng ký thành công!
+                </h5>
+
+                <p class="small text-muted">
+                    Thông tin thành viên của bạn:
+                </p>
+
+                <p class="mb-2">
+                    <strong>Họ và tên:</strong>
+                    <span id="resultName"></span>
+                </p>
+
+                <p class="mb-2">
+                    <strong>Email:</strong>
+                    <span id="resultEmail"></span>
+                </p>
+
+                <p class="mb-3">
+                    <strong>Ngày đăng ký:</strong>
+                    <span id="resultDate"></span>
+                </p>
+
+                <a href="index.html" class="btn btn-register">
+                    Về trang chủ
+                </a>
+            </div>
+
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        © 2026 IUH BEAUTY. Chăm sóc vẻ đẹp của bạn mỗi ngày.
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script>
+        const USERS_KEY = 'iuh_users';
+
+        const form = document.getElementById('registerForm');
+        const nameInput = document.getElementById('regName');
+        const emailInput = document.getElementById('regEmail');
+        const passwordInput = document.getElementById('regPassword');
+        const confirmInput = document.getElementById('regConfirm');
+
+        const registerError = document.getElementById('registerError');
+        const successBox = document.getElementById('successBox');
+
+        function getUsers() {
+            try {
+                const users = JSON.parse(
+                    localStorage.getItem(USERS_KEY) || '[]'
+                );
+
+                return Array.isArray(users) ? users : [];
+            } catch (error) {
+                return [];
+            }
+        }
+
+        function showFieldError(id, message) {
+            document.getElementById(id).textContent = message;
+        }
+
+        function clearErrors() {
+            document.querySelectorAll('.error-text').forEach(function (item) {
+                item.textContent = '';
+            });
+
+            registerError.textContent = '';
+            registerError.classList.add('d-none');
+        }
+
+        function showGeneralError(message) {
+            registerError.textContent = message;
+            registerError.classList.remove('d-none');
+        }
+
+        form.addEventListener('submit', function (event) {
+            event.preventDefault();
+            clearErrors();
+            successBox.classList.add('d-none');
+
+            const name = nameInput.value.trim();
+            const email = emailInput.value.trim().toLowerCase();
+            const password = passwordInput.value;
+            const confirmPassword = confirmInput.value;
+
+            let valid = true;
+
+            // Kiểm tra họ tên
+            if (name === '') {
+                showFieldError('nameError', 'Vui lòng nhập họ và tên.');
+                valid = false;
+            } else if (name.length > 100) {
+                showFieldError('nameError', 'Họ và tên không được quá 100 ký tự.');
+                valid = false;
+            }
+
+            // Kiểm tra email
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+            if (email === '') {
+                showFieldError('emailError', 'Vui lòng nhập email.');
+                valid = false;
+            } else if (!emailRegex.test(email)) {
+                showFieldError('emailError', 'Email không đúng định dạng.');
+                valid = false;
+            }
+
+            // Kiểm tra mật khẩu
+            if (password === '') {
+                showFieldError('passwordError', 'Vui lòng nhập mật khẩu.');
+                valid = false;
+            } else if (password.length < 8) {
+                showFieldError('passwordError', 'Mật khẩu phải có ít nhất 8 ký tự.');
+                valid = false;
+            }
+
+            // Kiểm tra nhập lại mật khẩu
+            if (confirmPassword === '') {
+                showFieldError('confirmError', 'Vui lòng nhập lại mật khẩu.');
+                valid = false;
+            } else if (password !== confirmPassword) {
+                showFieldError('confirmError', 'Mật khẩu nhập lại không khớp.');
+                valid = false;
+            }
+
+            if (!valid) return;
+
+            // Đọc danh sách tài khoản hiện có
+            const users = getUsers();
+
+            // Không cho đăng ký email trùng
+            const emailExists = users.some(function (user) {
+                return user.email &&
+                    user.email.toLowerCase() === email;
+            });
+
+            if (emailExists) {
+                showFieldError(
+                    'emailError',
+                    'Email này đã được đăng ký. Vui lòng sử dụng email khác.'
+                );
+                return;
+            }
+
+            // Lưu tài khoản theo đúng cấu trúc trang chủ đang dùng
+            const newUser = {
+                name: name,
+                email: email,
+                password: password
+            };
+
+            try {
+                users.push(newUser);
+                localStorage.setItem(USERS_KEY, JSON.stringify(users));
+            } catch (error) {
+                showGeneralError(
+                    'Không thể lưu tài khoản. Vui lòng kiểm tra bộ nhớ trình duyệt.'
+                );
+                return;
+            }
+
+            // Hiển thị thông tin đăng ký thành công
+            document.getElementById('resultName').textContent = name;
+            document.getElementById('resultEmail').textContent = email;
+            document.getElementById('resultDate').textContent =
+                new Date().toLocaleDateString('vi-VN');
+
+            form.classList.add('d-none');
+            successBox.classList.remove('d-none');
+
+            successBox.scrollIntoView({
+                behavior: 'smooth',
+                block: 'center'
+            });
+        });
+    </script>
+
+</body>
+</html>
