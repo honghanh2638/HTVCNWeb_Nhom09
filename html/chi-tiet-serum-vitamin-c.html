@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IUH BEAUTY - Serum Vitamin C</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
+    <style>
+        :root { --primary: #ef66ad; --primary-dark: #d94e96; --bg-soft: #fbf7fa; }
+        body { font-family: 'Segoe UI', Arial, sans-serif; color: #2c2c2c; background-color: #fff; }
+        a { text-decoration: none; }
+        .container { padding-left: clamp(18px, 4vw, 64px); padding-right: clamp(18px, 4vw, 64px); }
+        .top-bar { background: var(--primary); color: #fff; font-size: 13px; }
+        .navbar-brand { font-weight: 700; letter-spacing: 2px; color: var(--primary) !important; line-height: 1.1; }
+        .navbar-brand small { display: block; font-size: 10px; letter-spacing: 4px; color: #888; }
+        .navbar .nav-link { color: #333; font-weight: 500; }
+        .navbar .nav-link:hover, .navbar .nav-link.active { color: var(--primary); }
+        .navbar-icons i { font-size: 18px; color: #333; cursor: pointer; }
+        .btn-primary-custom { background: var(--primary); border-color: var(--primary); color: #fff; }
+        .btn-primary-custom:hover { background: var(--primary-dark); border-color: var(--primary-dark); color: #fff; }
+        .btn-outline-custom { border: 2px solid var(--primary); color: var(--primary); background: transparent; }
+        .btn-outline-custom:hover { background: var(--primary); color: #fff; }
+        .product-main-view { background: var(--bg-soft); border-radius: 16px; height: 450px; display: flex; align-items: center; justify-content: center; overflow: hidden; border: 1px solid #f2eaf5; }
+        .product-main-view img { width: 100%; height: 100%; object-fit: cover; }
+        .eyebrow { color: var(--primary); font-weight: 600; font-size: 13px; letter-spacing: 1px; }
+        .price-large { font-size: 1.75rem; font-weight: 700; color: var(--primary); }
+        .qty-control { display: inline-flex; align-items: center; border: 1px solid #ddd; border-radius: 8px; background: #fff; }
+        .qty-control button { border: none; background: transparent; width: 38px; height: 38px; font-weight: bold; }
+        .qty-control input { width: 45px; text-align: center; border: none; outline: none; }
+        .policy-card { background: var(--bg-soft); border-radius: 12px; border: 1px solid #eee; }
+        footer { background: var(--primary); color: #fff; }
+    </style>
+</head>
+<body>
+    <div class="top-bar py-2">
+        <div class="container d-flex justify-content-between small">
+            <span><i class="bi bi-truck me-1"></i>Miễn phí vận chuyển cho đơn hàng trên 1.000.000đ</span>
+            <span class="d-none d-md-block">Theo dõi đơn hàng | Hệ thống cửa hàng | Hỗ trợ</span>
+        </div>
+    </div>
+
+    <nav class="navbar navbar-expand-lg navbar-light bg-white sticky-top shadow-sm py-3">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">IUH<small>BEAUTY</small></a>
+            <div class="collapse navbar-collapse justify-content-center">
+                <ul class="navbar-nav gap-lg-4">
+                    <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+                    <li class="nav-item"><a class="nav-link active" href="index.html#categories">Shop</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#">Makeup</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#">Skincare</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#">Blog</a></li>
+                    <li class="nav-item"><a class="nav-link" href="dangky.html">Đăng ký</a></li>
+                </ul>
+            </div>
+            <div class="navbar-icons d-flex align-items-center gap-3">
+                <a href="gio-hang.html" class="position-relative text-dark">
+                    <i class="bi bi-bag"></i>
+                    <span class="badge bg-danger rounded-pill position-absolute top-0 start-100 translate-middle" id="cartCount">0</span>
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="bg-light py-2 border-bottom">
+        <div class="container">
+            <ol class="breadcrumb mb-0 small">
+                <li class="breadcrumb-item"><a href="index.html" class="text-muted">Home</a></li>
+                <li class="breadcrumb-item"><a href="index.html#bestsellers" class="text-muted">Skincare</a></li>
+                <li class="breadcrumb-item active text-dark fw-bold">Serum Vitamin C</li>
+            </ol>
+        </div>
+    </div>
+
+    <section class="py-5">
+        <div class="container">
+            <div class="row g-5">
+                <div class="col-lg-6">
+                    <div class="product-main-view shadow-sm">
+                        <img src="./img/prod-vitaminc.jpg" alt="Serum Vitamin C">
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="eyebrow mb-2">CHỐNG OXY HÓA</div>
+                    <h1 class="fw-bold mb-2">Serum Vitamin C</h1>
+                    <div class="d-flex align-items-center gap-3 mb-3">
+                        <div class="text-warning small">★★★★☆</div>
+                        <span class="text-muted small">(112 đánh giá)</span>
+                        <span class="badge bg-success-subtle text-success border border-success-subtle px-2 py-1">Còn hàng</span>
+                    </div>
+                    <div class="price-large mb-3">635.934.790.000 VNĐ</div>
+                    <p class="text-secondary mb-4" style="line-height: 1.8;">
+                        Công thức Vitamin C bọc phân tử thế hệ mới giúp làm mờ thâm nám, đều màu da hiệu quả và hỗ trợ tăng sinh collagen mà không gây châm chích cho làn da nhạy cảm.
+                    </p>
+                    <div class="d-flex align-items-center gap-3 mb-4">
+                        <div class="qty-control">
+                            <button type="button" onclick="stepQty(-1)">-</button>
+                            <input type="text" id="buyQty" value="1" readonly>
+                            <button type="button" onclick="stepQty(1)">+</button>
+                        </div>
+                        <button class="btn btn-primary-custom px-4 py-2 rounded-2 fw-semibold" onclick="handleAddToCart(5, 'Serum Vitamin C', 635934790000, './img/prod-vitaminc.jpg')">
+                            <i class="bi bi-cart-plus me-1"></i> Thêm Vào Giỏ Hàng
+                        </button>
+                        <a href="chi-tiet-serum-duong-sang.html" class="btn btn-outline-custom px-4 py-2 rounded-2 fw-semibold">&larr; Quay lại món đầu</a>
+                    </div>
+                    <div class="policy-card p-3">
+                        <div class="row g-3 small text-secondary">
+                            <div class="col-6"><i class="bi bi-sun-fill text-warning me-2"></i>Tăng cường hiệu quả chống nắng</div>
+                            <div class="col-6"><i class="bi bi-shield-check text-success me-2"></i>Không gây châm chích da</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mt-5 bg-white p-4 rounded-3 border">
+                <h5 class="fw-bold text-dark mb-3">Công Dụng & Thành Phần Vàng</h5>
+                <p><strong>Thành phần chính:</strong> 3-O-Ethyl Ascorbic Acid 15%, Ferulic Acid, Tinh chất quả mận Kakadu, Vitamin E.</p>
+                <p><strong>Bảo quản:</strong> Nơi khô ráo, thoáng mát, tránh ánh nắng trực tiếp hoặc bảo quản trong ngăn mát tủ lạnh.</p>
+            </div>
+        </div>
+    </section>
+
+    <footer class="pt-5 pb-3">
+        <div class="container text-center small opacity-75">© 2026 IUH Beauty. Bản quyền của Nguyễn Tuấn Khôi.</div>
+    </footer>
+
+    <script>
+        function stepQty(n) {
+            let input = document.getElementById('buyQty');
+            let val = parseInt(input.value) + n;
+            if (val >= 1) input.value = val;
+        }
+        function refreshCartBadge() {
+            let cart = JSON.parse(localStorage.getItem('iuh_cart_items') || '[]');
+            let total = cart.reduce((sum, item) => sum + item.quantity, 0);
+            document.getElementById('cartCount').textContent = total;
+        }
+        function handleAddToCart(id, title, price, img) {
+            let qty = parseInt(document.getElementById('buyQty').value) || 1;
+            let cart = JSON.parse(localStorage.getItem('iuh_cart_items') || '[]');
+            let item = cart.find(i => i.id === id);
+            if (item) { item.quantity += qty; } else { cart.push({ id, title, price, img, quantity: qty }); }
+            localStorage.setItem('iuh_cart_items', JSON.stringify(cart));
+            refreshCartBadge();
+            alert(`Đã thêm ${qty} "${title}" vào giỏ hàng!`);
+        }
+        refreshCartBadge();
+    </script>
+</body>
+</html>
