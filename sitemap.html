@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sitemap - IUH BEAUTY</title>
+
+    <!-- Bootstrap (file trong máy) -->
+    <link href="../css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- CSS Dùng Chung -->
+    <link rel="stylesheet" href="../css/style.css">
+
+    <style>
+      :root{--line:#d9cbea}
+      .sm-node{display:inline-block;min-width:140px;padding:10px 14px;background:var(--bg-soft);border:2px solid var(--line);border-radius:10px;color:#2c2c2c;font-size:14px;font-weight:600;text-align:center;text-decoration:none;transition:background .15s,color .15s}
+      .sm-node small{display:block;font-weight:400;font-size:12px;color:#777;margin-top:2px}
+      .sm-node:hover{background:var(--primary);border-color:var(--primary);color:#fff}
+      .sm-node:hover small{color:#fff}
+      .sm-node.root{background:var(--primary-dark);border-color:var(--primary-dark);color:#fff;font-size:16px}
+      .sm-node.root small{color:#fff;opacity:.8}
+      .sm-hub{text-align:center}
+      .sm-stem{width:2px;height:28px;background:var(--line);margin:0 auto}
+      .sm-box{border:2px dashed var(--line);border-radius:16px;padding:20px 14px;display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:12px;justify-items:center}
+      .sm-note{font-size:13px;color:#777;margin:10px 0 0}
+      .sm-flow{display:flex;align-items:center;flex-wrap:wrap;gap:10px;padding:14px;border:1px solid var(--line);border-radius:12px;background:#fff;margin-bottom:12px}
+      .sm-arrow{font-size:22px;color:var(--primary);font-weight:700}
+      .sm-stack{display:flex;flex-direction:column;gap:8px}
+      .sm-table th{background:var(--primary);color:#fff;font-weight:600}
+    </style>
+</head>
+<body>
+
+    <!-- 1. TOP BAR -->
+    <div class="top-bar py-2">
+        <div class="container d-flex justify-content-between small">
+            <span>🚚Miễn phí vận chuyển cho đơn hàng trên 1.000.000đ</span>
+            <span class="d-none d-md-block">Theo dõi đơn hàng | Hệ thống cửa hàng | Hỗ trợ</span>
+        </div>
+    </div>
+
+    <!-- 2. NAVBAR -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-white sticky-top shadow-sm py-3">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">IUH<small>BEAUTY</small></a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navMenu">
+                <ul class="navbar-nav mx-auto gap-lg-4">
+                    <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="shop.html">Shop</a></li>
+                    <li class="nav-item"><a class="nav-link" href="makeup.html">Makeup</a></li>
+                    <li class="nav-item"><a class="nav-link" href="skincare.html">Skincare</a></li>
+                    <li class="nav-item"><a class="nav-link" href="haircare.html">Haircare</a></li>
+                    <li class="nav-item"><a class="nav-link" href="about.html">About Us</a></li>
+                    <li class="nav-item"><a class="nav-link" href="blog.html">Blog</a></li>
+                    <li class="nav-item"><a class="nav-link" href="contact.html">Contact Us</a></li>
+                </ul>
+                <div class="navbar-icons d-flex gap-3 mt-3 mt-lg-0">
+                    🔍
+                    👤
+                    <span class="position-relative">
+                        🛍️
+                        <span class="badge bg-danger rounded-pill position-absolute top-0 start-100 translate-middle">2</span>
+                    </span>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- ========================================================= -->
+    <!--  CHỖ NÀY DÀNH CHO CÁC BẠN TỰ CODE NỘI DUNG TRANG CỦA MÌNH  -->
+    <!-- ========================================================= -->
+    <main class="py-5" style="min-height: 50vh;">
+        <div class="container">
+            <h2 class="text-center mb-2">Sơ đồ website</h2>
+            <p class="text-center text-muted mb-4">Cấu trúc 12 trang của IUH Beauty và mối quan hệ giữa các trang. Nhấn vào từng ô để mở trang.</p>
+
+            <h5 class="mb-3">1. Trang chủ liên kết tới tất cả các trang</h5>
+            <div class="sm-hub">
+              <a class="sm-node root" href="index.html">Trang chủ<small>index.html</small></a>
+              <div class="sm-stem"></div>
+              <div class="sm-box"><a class="sm-node " href="sitemap.html">Sitemap<small>sitemap.html</small></a><a class="sm-node " href="register.html">Đăng ký<small>register.html</small></a><a class="sm-node " href="register-success.html">Đăng ký thành công<small>register-success.html</small></a><a class="sm-node " href="about.html">Giới thiệu<small>about.html</small></a><a class="sm-node " href="skincare.html">Chăm sóc da<small>skincare.html</small></a><a class="sm-node " href="makeup.html">Trang điểm<small>makeup.html</small></a><a class="sm-node " href="haircare.html">Chăm sóc tóc<small>haircare.html</small></a><a class="sm-node " href="product-serum.html">Chi tiết: Serum<small>product-serum.html</small></a><a class="sm-node " href="product-lipstick.html">Chi tiết: Son lì<small>product-lipstick.html</small></a><a class="sm-node " href="cart.html">Giỏ hàng<small>cart.html</small></a><a class="sm-node " href="checkout.html">Thanh toán / Xác nhận<small>checkout.html</small></a></div>
+              <p class="sm-note">Các ô trong khung nét đứt đều có link từ Trang chủ.</p>
+            </div>
+
+            <h5 class="mt-5 mb-3">2. Liên kết giữa các trang với nhau</h5>
+            <div class="sm-flow"><a class="sm-node " href="register.html">Đăng ký<small>register.html</small></a><span class="sm-arrow">→</span><a class="sm-node " href="register-success.html">Đăng ký thành công<small>register-success.html</small></a></div>
+            <div class="sm-flow"><a class="sm-node " href="skincare.html">Chăm sóc da<small>skincare.html</small></a><span class="sm-arrow">→</span><a class="sm-node " href="product-serum.html">Chi tiết: Serum<small>product-serum.html</small></a></div>
+            <div class="sm-flow"><a class="sm-node " href="makeup.html">Trang điểm<small>makeup.html</small></a><span class="sm-arrow">→</span><a class="sm-node " href="product-lipstick.html">Chi tiết: Son lì<small>product-lipstick.html</small></a></div>
+            <div class="sm-flow"><a class="sm-node " href="cart.html">Giỏ hàng<small>cart.html</small></a><span class="sm-arrow">→</span><div class="sm-stack"><a class="sm-node " href="product-serum.html">Chi tiết: Serum<small>product-serum.html</small></a><a class="sm-node " href="product-lipstick.html">Chi tiết: Son lì<small>product-lipstick.html</small></a></div></div>
+            <div class="sm-flow"><a class="sm-node " href="cart.html">Giỏ hàng<small>cart.html</small></a><span class="sm-arrow">→</span><a class="sm-node " href="checkout.html">Thanh toán / Xác nhận<small>checkout.html</small></a></div>
+
+            <h5 class="mt-5 mb-3">3. Danh sách trang</h5>
+            <div class="table-responsive">
+              <table class="table table-striped align-middle sm-table">
+                <thead><tr><th>#</th><th>Trang</th><th>File</th><th>Nội dung chính</th><th>Liên kết tới</th></tr></thead>
+                <tbody>
+                  <tr><td>1</td><td>Sitemap</td><td><a href="sitemap.html">sitemap.html</a></td><td>Sơ đồ cấu trúc và quan hệ giữa các trang</td><td>Trang chủ</td></tr>
+                  <tr><td>2</td><td>Trang chủ</td><td><a href="index.html">index.html</a></td><td>Logo, đăng nhập, tìm kiếm, sản phẩm nổi bật, footer</td><td>Tất cả các trang còn lại</td></tr>
+                  <tr><td>3</td><td>Đăng ký</td><td><a href="register.html">register.html</a></td><td>Form đăng ký, kiểm tra dữ liệu bằng JavaScript/jQuery</td><td>Đăng ký thành công</td></tr>
+                  <tr><td>4</td><td>Đăng ký thành công</td><td><a href="register-success.html">register-success.html</a></td><td>Hiển thị thông tin đã đăng ký (LocalStorage)</td><td>Trang chủ</td></tr>
+                  <tr><td>5</td><td>Giới thiệu</td><td><a href="about.html">about.html</a></td><td>Giới thiệu website và thành viên nhóm</td><td>Trang chủ</td></tr>
+                  <tr><td>6</td><td>Chăm sóc da</td><td><a href="skincare.html">skincare.html</a></td><td>Danh sách sản phẩm chăm sóc da</td><td>Chi tiết Serum</td></tr>
+                  <tr><td>7</td><td>Trang điểm</td><td><a href="makeup.html">makeup.html</a></td><td>Danh sách sản phẩm trang điểm</td><td>Chi tiết Son lì</td></tr>
+                  <tr><td>8</td><td>Chăm sóc tóc</td><td><a href="haircare.html">haircare.html</a></td><td>Danh sách sản phẩm chăm sóc tóc</td><td>Trang chủ</td></tr>
+                  <tr><td>9</td><td>Chi tiết: Serum</td><td><a href="product-serum.html">product-serum.html</a></td><td>Thông tin chi tiết sản phẩm, thêm vào giỏ</td><td>Giỏ hàng</td></tr>
+                  <tr><td>10</td><td>Chi tiết: Son lì</td><td><a href="product-lipstick.html">product-lipstick.html</a></td><td>Thông tin chi tiết sản phẩm, thêm vào giỏ</td><td>Giỏ hàng</td></tr>
+                  <tr><td>11</td><td>Giỏ hàng</td><td><a href="cart.html">cart.html</a></td><td>Sản phẩm đã chọn, số lượng, tổng tiền (LocalStorage)</td><td>Chi tiết Serum, Chi tiết Son lì, Thanh toán / Xác nhận</td></tr>
+                  <tr><td>12</td><td>Thanh toán / Xác nhận</td><td><a href="checkout.html">checkout.html</a></td><td>Thông tin giao hàng, thanh toán, xác nhận đơn hàng</td><td>Trang chủ</td></tr>
+                  </tbody>
+              </table>
+            </div>
+        </div>
+    </main>
+    <!-- ========================================================= -->
+
+    <!-- 3. FOOTER -->
+    <footer class="pt-5 pb-3">
+        <div class="container">
+            <div class="row g-4 mb-4">
+                <div class="col-lg-4 col-md-6">
+                    <h4>Luôn Rạng Rỡ</h4>
+                    <p class="small opacity-75 mb-3">Đăng ký nhận bản tin và nhận ưu đãi 10% cho đơn đầu tiên.</p>
+                    <div class="input-group mb-3" style="max-width:320px;">
+                        <input type="email" class="form-control" placeholder="Email của bạn">
+                        <button class="btn btn-newsletter">Đăng ký</button>
+                    </div>
+                    <div>
+                        <span class="social-icon">IG</span>
+                        <span class="social-icon">FB</span>
+                        <span class="social-icon">YT</span>
+                        <span class="social-icon">TT</span>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-6 col-md-3">
+                    <h4>Cửa Hàng</h4>
+                    <ul class="list-unstyled">
+                        <li><a href="#" class="text-white text-decoration-none opacity-75">Tất cả sản phẩm</a></li>
+                        <li><a href="skincare.html" class="text-white text-decoration-none opacity-75">Chăm sóc da</a></li>
+                        <li><a href="makeup.html" class="text-white text-decoration-none opacity-75">Trang điểm</a></li>
+                        <li><a href="haircare.html" class="text-white text-decoration-none opacity-75">Chăm sóc tóc</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-2 col-6 col-md-3">
+                    <h4>Khách Hàng</h4>
+                    <ul class="list-unstyled">
+                        <li><a href="#" class="text-white text-decoration-none opacity-75">Theo dõi đơn hàng</a></li>
+                        <li><a href="#" class="text-white text-decoration-none opacity-75">Vận chuyển & Giao hàng</a></li>
+                        <li><a href="#" class="text-white text-decoration-none opacity-75">Đổi trả & Hoàn tiền</a></li>
+                        <li><a href="#" class="text-white text-decoration-none opacity-75">Câu hỏi thường gặp</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-2 col-6 col-md-3">
+                    <h4>Công Ty</h4>
+                    <ul class="list-unstyled">
+                        <li><a href="about.html" class="text-white text-decoration-none opacity-75">Về chúng tôi</a></li>
+                        <li><a href="sitemap.html" class="text-white text-decoration-none opacity-75">Sơ đồ website</a></li>
+                        <li><a href="#" class="text-white text-decoration-none opacity-75">Thành phần</a></li>
+                        <li><a href="#" class="text-white text-decoration-none opacity-75">Tuyển dụng</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-2 col-6 col-md-3">
+                    <h4>Liên Hệ</h4>
+                    <ul class="list-unstyled">
+                        <li>📞 1900 1234</li>
+                        <li>✉️ hello@elorabeauty.vn</li>
+                        <li>📍 Đại học Công nghiệp TP.HCM</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="text-center small opacity-75 border-top pt-3">© 2024 Elora Beauty. Đã đăng ký bản quyền.</div>
+        </div>
+    </footer>
+
+    <!-- Bootstrap JS Bundle -->
+    <script src="../js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
