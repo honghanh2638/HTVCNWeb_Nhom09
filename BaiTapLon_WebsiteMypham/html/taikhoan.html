@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IUH BEAUTY - Tài Khoản Của Tôi</title>
+    <link href="../css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../css/icon-don-gian.css">
+       <script src="../js/cart-storage.js"></script>
+    <style>
+        :root { 
+            --primary: #ef66ad; 
+            --primary-hover: #e04f98;
+            --bg-soft: #fcf4f8; 
+        }
+        body { 
+            font-family: 'Segoe UI', Arial, sans-serif; 
+            background-color: var(--bg-soft); 
+            color: #2c2c2c;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+        a { text-decoration: none; }
+        
+        .auth-header {
+            background: #fff;
+            padding: 15px 0;
+        }
+        
+        .account-card {
+            background: #ffffff;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(239, 102, 173, 0.08);
+            border: none;
+            padding: 40px;
+            max-width: 550px;
+            width: 100%;
+            margin: auto;
+        }
+
+        .avatar-circle {
+            width: 90px;
+            height: 90px;
+            background-color: #fce4ec;
+            color: var(--primary);
+            font-size: 2.5rem;
+            font-weight: 700;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 15px;
+            border: 3px solid var(--primary);
+        }
+
+        .info-box {
+            background: #fbf7fa;
+            border-radius: 12px;
+            padding: 20px;
+            border: 1px solid #f2eaf5;
+        }
+
+        .btn-logout {
+            background-color: #dc3545;
+            border: none;
+            color: white;
+            font-weight: 600;
+            padding: 12px;
+            border-radius: 10px;
+            transition: all 0.2s ease;
+        }
+
+        .btn-logout:hover {
+            background-color: #bb2d3b;
+            color: white;
+        }
+
+        .btn-home {
+            background-color: var(--primary);
+            border: none;
+            color: white;
+            font-weight: 600;
+            padding: 12px;
+            border-radius: 10px;
+        }
+
+        .btn-home:hover {
+            background-color: var(--primary-hover);
+            color: white;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header -->
+    <header class="auth-header shadow-sm">
+        <div class="container d-flex justify-content-between align-items-center">
+            <a class="navbar-brand fw-bold fs-3" href="index.html" style="color: #ef66ad; letter-spacing: 2px;">
+                IUH<small class="d-block text-muted fw-normal" style="font-size: 10px; letter-spacing: 4px;">BEAUTY</small>
+            </a>
+            <div class="d-flex align-items-center gap-4">
+                <a href="index.html" class="text-secondary fw-semibold">Trang chủ</a>
+                <a href="giohang.html" class="text-secondary fw-semibold">Giỏ hàng</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content: Thẻ Thông Tin Tài Khoản -->
+    <main class="container my-5 d-flex align-items-center justify-content-center flex-grow-1">
+        <div class="account-card text-center">
+            <div class="avatar-circle" id="userAvatar">U</div>
+            <h3 class="fw-bold mb-1" id="userNameDisplay">Tên Thành Viên</h3>
+            <p class="text-muted small mb-4">Thành viên thân thiết IUH BEAUTY</p>
+
+            <div class="info-box text-start mb-4">
+                <div class="mb-2">
+                    <strong class="text-secondary">Họ và tên:</strong>
+                    <span class="float-end fw-semibold" id="infoFullname">---</span>
+                </div>
+                <hr class="my-2" style="border-color: #eee;">
+                <div>
+                    <strong class="text-secondary">Email:</strong>
+                    <span class="float-end fw-semibold" id="infoEmail">---</span>
+                </div>
+            </div>
+
+            <div class="d-grid gap-2">
+                <a href="index.html" class="btn btn-home">Tiếp tục mua sắm</a>
+                <button type="button" class="btn btn-logout" onclick="handleLogout()">Đăng xuất</button>
+            </div>
+        </div>
+    </main>
+
+    <script src="../js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Kiểm tra xem đã đăng nhập chưa khi mở trang
+        document.addEventListener('DOMContentLoaded', function() {
+            const currentUser = JSON.parse(localStorage.getItem('iuh_user_logged') || 'null');
+            
+            if (!currentUser) {
+                alert('Bạn chưa đăng nhập! Vui lòng đăng nhập.');
+                window.location.href = 'dangnhap.html';
+                return;
+            }
+
+            // Hiển thị thông tin người dùng
+            document.getElementById('userNameDisplay').innerText = currentUser.fullname || 'Thành Viên';
+            document.getElementById('infoFullname').innerText = currentUser.fullname || 'Chưa cập nhật';
+            document.getElementById('infoEmail').innerText = currentUser.email || 'Chưa cập nhật';
+            
+            // Lấy chữ cái đầu làm Avatar
+            const firstLetter = (currentUser.fullname || currentUser.email || 'U').charAt(0).toUpperCase();
+            document.getElementById('userAvatar').innerText = firstLetter;
+        });
+
+        // Xử lý Đăng xuất
+        function handleLogout() {
+            if (confirm('Bạn có chắc chắn muốn đăng xuất tài khoản?')) {
+                localStorage.removeItem('iuh_user_logged');
+                alert('Đã đăng xuất thành công!');
+                window.location.href = 'dangnhap.html';
+            }
+        }
+    </script>
+</body>
+</html>
