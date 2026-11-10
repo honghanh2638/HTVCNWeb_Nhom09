@@ -6,27 +6,29 @@
     <title>IUH BEAUTY - TRANG GIỎ HÀNG</title>
     <link rel="stylesheet" href="../css/bootstrap.min.css">
     <link rel="stylesheet" href="../css/cart.css">
+    <link rel="stylesheet" href="../css/icon-don-gian.css">
     <script src="../js/jquery-4.0.0.min.js"></script>
     <script src="../js/bootstrap.bundle.min.js"></script>
     <script src="../js/chung.js" defer></script>
     <script src="../js/cart.js" defer></script>
+    <script src="../js/cart-storage.js"></script>
 </head>
 <body>
     <div class="container cart-container">
 
         <div class="row header">
             <div class="col-12 header-content">
-                <a href="index.html" class="logo">IUH <span>BEAUTY</span></a>
-                <form class="search-box" action="index.html" method="get">
+                <a href="../html/index.html" class="logo">IUH <span>BEAUTY</span></a>
+                <form class="search-box" action="../html/index.html" method="get">
                     <input type="search" name="q" placeholder="Tìm kiếm sản phẩm..." aria-label="Tìm kiếm sản phẩm">
                     <button type="submit">Tìm</button>
                 </form>
 
                 <div class="header-icons">
-                    <a href="index.html" title="Trang chủ / Tài khoản" aria-label="Tài khoản">
+                    <a href="../html/index.html" title="Trang chủ / Tài khoản" aria-label="Tài khoản">
                         <img src="../img/use.png" alt="Tài khoản">
                     </a>
-                    <a href="cart.html" class="cart-icon" title="Giỏ hàng" aria-label="Giỏ hàng">
+                    <a href="../html/cart.html" class="cart-icon" title="Giỏ hàng" aria-label="Giỏ hàng">
                         <img src="../img/cart.png" alt="Giỏ hàng">
                         <span id="cartCount" class="cart-badge">0</span>
                     </a>
@@ -41,14 +43,14 @@
                         <button class="btn btn-category dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">&#9776; Danh mục sản phẩm</button>
                         <ul class="dropdown-menu">
                             <li><a class="dropdown-item" href="shop.html">Tất cả sản phẩm</a></li>
-                            <li><a class="dropdown-item" href="makeup.html">Makeup</a></li>
-                            <li><a class="dropdown-item" href="skincare.html">Skincare</a></li>
-                            <li><a class="dropdown-item" href="haircare.html">Haircare</a></li>
+                            <li><a class="dropdown-item" href="dsmakeup.html">Makeup</a></li>
+                            <li><a class="dropdown-item" href="dsskincare.html">Skincare</a></li>
+                            <li><a class="dropdown-item" href="dshaircare.html">Haircare</a></li>
                         </ul>
                     </div>
-                    <a class="menu-link" href="makeup.html">Makeup</a>
-                    <a class="menu-link" href="skincare.html">Skincare</a>
-                    <a class="menu-link" href="haircare.html">Haircare</a>
+                    <a class="menu-link" href="dsmakeup.html">Makeup</a>
+                    <a class="menu-link" href="dsskincare.html">Skincare</a>
+                    <a class="menu-link" href="dshaircare.html">Haircare</a>
                 </nav>
             </div>
         </div>
@@ -80,10 +82,10 @@
                         <div class="empty-icon" aria-hidden="true">&#128717;</div>
                         <h2>Giỏ hàng của bạn đang trống</h2>
                         <p>Hãy chọn thêm sản phẩm yêu thích nhé!</p>
-                        <a href="index.html" class="btn-shop">Mua sắm ngay</a>
+                        <a href="../html/index.html" class="btn-shop">Mua sắm ngay</a>
                     </div>
                     <div class="cart-list-footer" id="cartFooter">
-                        <a href="index.html">Tiếp tục mua sắm</a>
+                        <a href="../html/index.html">Tiếp tục mua sắm</a>
                         <button type="button" id="btnDeleteSelected" disabled>Xóa sản phẩm đã chọn</button>
                     </div>
                 </div>

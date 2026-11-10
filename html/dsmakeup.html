@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IUH BEAUTY - Trang Điểm (Makeup)</title>
+    <link href="../css/bootstrap.min.css" rel="stylesheet">
+    <script src="../js/cart-storage.js"></script>
+    <link rel="stylesheet" href="../css/icon-don-gian.css">
+    
+    <style>
+        *, *::before, *::after { box-sizing: border-box; }
+        :root { --primary: #ef68ae; --primary-dark: #ef68ae; --bg-soft: #f5ecf8; --bg-banner: #e9defa; --bg-filter: #f5f1fa; --border-color: #e0d3f5; }
+        body { font-family: 'Segoe UI', Arial, sans-serif; color: #2c2c2c; background-color: #faf9f9; overflow-x: hidden; }
+        a { text-decoration: none; }
+        .container { width: 100%; max-width: 1240px; padding-left: clamp(18px, 4vw, 64px); padding-right: clamp(18px, 4vw, 64px); }
+        .top-bar { background: var(--primary); color: #fff; font-size: 13px; }
+        .navbar-brand { font-weight: 700; letter-spacing: 2px; color: var(--primary-dark) !important; line-height: 1.1; }
+        .navbar-brand small { display: block; font-size: 10px; letter-spacing: 4px; font-weight: 400; color: #888; }
+        .navbar .nav-link { color: #333; font-weight: 500; }
+        .navbar .nav-link:hover, .navbar .nav-link.active { color: var(--primary); }
+        .category-banner { background: linear-gradient(135deg, var(--bg-banner), #f7edf6); padding: 40px 0; border-bottom: 1px solid var(--border-color); }
+        .product-card { border: none; border-radius: 12px; transition: transform 0.3s ease, box-shadow 0.3s ease; background: #fff; }
+        .product-card:hover { transform: translateY(-5px); box-shadow: 0 10px 20px rgba(239, 104, 174, 0.15); }
+        .product-img-box { height: 220px; background: var(--bg-soft); border-radius: 12px 12px 0 0; overflow: hidden; }
+        .product-img-box img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.3s ease; }
+        .product-card:hover .product-img-box img { transform: scale(1.05); }
+        .price { font-weight: 700; color: var(--primary-dark); }
+        .add-cart-btn { width: 36px; height: 36px; border-radius: 50%; background: var(--bg-filter); border: none; color: var(--primary); }
+        .add-cart-btn:hover { background: var(--primary); color: #fff; }
+        footer { background: var(--primary-dark); color: #fff; }
+        /* Hiệu ứng active menu: tô đậm và có đường gạch chân màu hồng */
+    .navbar-nav .nav-item .nav-link.active-page {
+        color: #ef66ad !important;
+        font-weight: 700;
+        position: relative;
+    }
+
+    .navbar-nav .nav-item .nav-link.active-page::after {
+        content: '';
+        position: absolute;
+        bottom: -2px; /* Khoảng cách từ chữ xuống đường gạch chân */
+        left: 0;
+        width: 100%;
+        height: 3px;
+        background-color: #ef66ad;
+        border-radius: 2px;
+    }
+    </style>
+</head>
+<body>
+    <div class="top-bar py-2">
+        <div class="container d-flex justify-content-between small">
+            <span><i class="bi bi-truck me-1"></i>Miễn phí vận chuyển cho đơn hàng trên 1.000.000đ</span>
+            <span class="d-none d-md-block">Theo dõi đơn hàng | Hệ thống cửa hàng | Hỗ trợ</span>
+        </div>
+    </div>
+
+    <!-- NAVBAR MAU CHUAN 3 ICON (SEARCH, PERSON, CART) -->
+<nav class="navbar navbar-expand-lg navbar-light bg-white sticky-top shadow-sm py-3">
+    <div class="container">
+        <a class="navbar-brand fw-bold fs-3" href="index.html" style="color: #ef66ad; letter-spacing: 2px;">
+            IUH<small class="d-block text-muted fw-normal" style="font-size: 10px; letter-spacing: 4px;">BEAUTY</small>
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navMenu">
+            <ul class="navbar-nav mx-auto gap-lg-4">
+                <li class="nav-item"><a class="nav-link fw-semibold" href="index.html">Home</a></li>
+                <li class="nav-item"><a class="nav-link fw-semibold" href="index.html#categories">Shop</a></li>
+                <li class="nav-item"><a class="nav-link fw-semibold active-page" href="dsmakeup.html">Makeup</a></li>
+                <li class="nav-item"><a class="nav-link fw-semibold" href="dsskincare.html">Skincare</a></li>
+                <li class="nav-item"><a class="nav-link fw-semibold" href="dshaircare.html">Haircare</a></li>
+                <li class="nav-item"><a class="nav-link fw-semibold" href="about.html">About Us</a></li>
+                <li class="nav-item"><a class="nav-link fw-semibold" href="Blog.html">Blog</a></li>
+                <li class="nav-item"><a class="nav-link fw-semibold" href="dangky.html">Đăng ký</a></li>
+            </ul>
+            <!-- 3 Icon bên phải -->
+            <div class="navbar-icons d-flex align-items-center gap-3 mt-3 mt-lg-0">
+                <a href="index.html#searchCollapse" class="text-dark fs-5" title="Tìm kiếm"><i class="bi bi-search"></i></a>
+                <a href="taikhoan.html" class="text-dark fs-5"><i class="bi bi-person"></i></a>
+                <a href="cart.html" class="position-relative text-dark fs-5" title="Giỏ hàng">
+    <i class="bi bi-bag"></i>
+    <span class="badge bg-danger rounded-pill position-absolute top-0 start-100 translate-middle" id="cartCount">0</span>
+</a>
+            </div>
+        </div>
+    </div>
+</nav>
+
+    <section class="category-banner text-center">
+        <div class="container">
+            <h2 class="fw-bold text-uppercase mb-2">Bộ Sưu Tập Makeup</h2>
+            <p class="text-muted mb-0">Tôn vinh nét đẹp quyến rũ, hiện đại cùng các dòng trang điểm cao cấp.</p>
+        </div>
+    </section>
+
+    <section class="py-5">
+        <div class="container">
+            <div class="row g-4" id="productGrid">
+                <!-- SP 1 -->
+                <div class="col-6 col-md-4 col-lg-3">
+                    <div class="card product-card h-100 shadow-sm">
+                        <a href="chi-tiet-son-li-velvet-tint.html">
+                            <div class="product-img-box"><img src="../img/son-mac-646-mau-do-gach-apa-niche.webp" alt="Son Lì Velvet Tint"></div>
+                        </a>
+                        <div class="card-body d-flex flex-column justify-content-between">
+                            <div>
+                                <a href="chi-tiet-son-li-velvet-tint.html" class="text-dark"><h6 class="card-title fw-bold">Son Lì Velvet Tint</h6></a>
+                                <div class="text-warning small mb-2">★★★★★ <span class="text-muted">(48)</span></div>
+                            </div>
+                            <div class="d-flex justify-content-between align-items-center mt-3">
+                                <span class="price">320.000 VNĐ</span>
+                                <a href="chi-tiet-son-li-velvet-tint.html" class="add-cart-btn d-flex align-items-center justify-content-center"><i class="bi bi-eye"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- SP 2 -->
+                <div class="col-6 col-md-4 col-lg-3">
+                    <div class="card product-card h-100 shadow-sm">
+                        <a href="chi-tiet-phan-nuoc-cushion-glossy.html">
+                            <div class="product-img-box"><img src="../img/cushion.jpg" alt="Phấn Nước Cushion Glossy"></div>
+                        </a>
+                        <div class="card-body d-flex flex-column justify-content-between">
+                            <div>
+                                <a href="chi-tiet-phan-nuoc-cushion-glossy.html" class="text-dark"><h6 class="card-title fw-bold">Phấn Nước Cushion Glossy</h6></a>
+                                <div class="text-warning small mb-2">★★★★☆ <span class="text-muted">(32)</span></div>
+                            </div>
+                            <div class="d-flex justify-content-between align-items-center mt-3">
+                                <span class="price">550.000 VNĐ</span>
+                                <a href="chi-tiet-phan-nuoc-cushion-glossy.html" class="add-cart-btn d-flex align-items-center justify-content-center"><i class="bi bi-eye"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- SP 3 -->
+                <div class="col-6 col-md-4 col-lg-3">
+                    <div class="card product-card h-100 shadow-sm">
+                        <a href="chi-tiet-bang-phan-mat-12-o.html">
+                            <div class="product-img-box"><img src="../img/pm.webp" alt="Bảng Phấn Mắt 12 Ô"></div>
+                        </a>
+                        <div class="card-body d-flex flex-column justify-content-between">
+                            <div>
+                                <a href="chi-tiet-bang-phan-mat-12-o.html" class="text-dark"><h6 class="card-title fw-bold">Bảng Phấn Mắt 12 Ô</h6></a>
+                                <div class="text-warning small mb-2">★★★★★ <span class="text-muted">(65)</span></div>
+                            </div>
+                            <div class="d-flex justify-content-between align-items-center mt-3">
+                                <span class="price">410.000 VNĐ</span>
+                                <a href="chi-tiet-bang-phan-mat-12-o.html" class="add-cart-btn d-flex align-items-center justify-content-center"><i class="bi bi-eye"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- SP 4 -->
+                <div class="col-6 col-md-4 col-lg-3">
+                    <div class="card product-card h-100 shadow-sm">
+                        <a href="chi-tiet-mascara-cong-day-mi.html">
+                            <div class="product-img-box"><img src="../img/masca.jpg" alt="Mascara Cong Dày Mi"></div>
+                        </a>
+                        <div class="card-body d-flex flex-column justify-content-between">
+                            <div>
+                                <a href="chi-tiet-mascara-cong-day-mi.html" class="text-dark"><h6 class="card-title fw-bold">Mascara Cong Dày Mi</h6></a>
+                                <div class="text-warning small mb-2">★★★★☆ <span class="text-muted">(19)</span></div>
+                            </div>
+                            <div class="d-flex justify-content-between align-items-center mt-3">
+                                <span class="price">260.000 VNĐ</span>
+                                <a href="chi-tiet-mascara-cong-day-mi.html" class="add-cart-btn d-flex align-items-center justify-content-center"><i class="bi bi-eye"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- SP 5 -->
+                <div class="col-6 col-md-4 col-lg-3">
+                    <div class="card product-card h-100 shadow-sm">
+                        <a href="chi-tiet-phan-ma-hong.html">
+                            <div class="product-img-box"><img src="../img/mh.jpg" alt="Phấn Má Hồng"></div>
+                        </a>
+                        <div class="card-body d-flex flex-column justify-content-between">
+                            <div>
+                                <a href="chi-tiet-phan-ma-hong.html" class="text-dark"><h6 class="card-title fw-bold">Phấn Má Hồng</h6></a>
+                                <div class="text-warning small mb-2">★★★★★ <span class="text-muted">(84)</span></div>
+                            </div>
+                            <div class="d-flex justify-content-between align-items-center mt-3">
+                                <span class="price">290.000 VNĐ</span>
+                                <a href="chi-tiet-phan-ma-hong.html" class="add-cart-btn d-flex align-items-center justify-content-center"><i class="bi bi-eye"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- SP 6 -->
+                <div class="col-6 col-md-4 col-lg-3">
+                    <div class="card product-card h-100 shadow-sm">
+                        <a href="chi-tiet-kem-lot-kiem-dau.html">
+                            <div class="product-img-box"><img src="../img/klot.jpg" alt="Kem Lót Kiềm Dầu Mịn Màng"></div>
+                        </a>
+                        <div class="card-body d-flex flex-column justify-content-between">
+                            <div>
+                                <a href="chi-tiet-kem-lot-kiem-dau.html" class="text-dark"><h6 class="card-title fw-bold">Kem Lót Kiềm Dầu Mịn Màng</h6></a>
+                                <div class="text-warning small mb-2">★★★★☆ <span class="text-muted">(51)</span></div>
+                            </div>
+                            <div class="d-flex justify-content-between align-items-center mt-3">
+                                <span class="price">380.000 VNĐ</span>
+                                <a href="chi-tiet-kem-lot-kiem-dau.html" class="add-cart-btn d-flex align-items-center justify-content-center"><i class="bi bi-eye"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+   <!-- FOOTER MAU CHUAN IUH BEAUTY (DUNG CHUNG 25 TRANG) -->
+<footer class="pt-5 pb-3 text-white" style="background-color: #ef66ad;">
+    <div class="container">
+        <div class="row g-4 mb-4">
+            <!-- Cột 1: Luôn Rạng Rỡ -->
+            <div class="col-lg-3 col-md-6">
+                <h5 class="fw-bold mb-3">Luôn Rạng Rỡ</h5>
+                <p class="small opacity-90 mb-3">Đăng ký nhận bản tin và nhận ưu đãi 10% cho đơn đầu tiên.</p>
+                <form action="#" class="mb-3">
+                    <div class="input-group">
+                        <input type="email" class="form-control border-0" placeholder="Email của bạn" style="border-radius: 6px 0 0 6px;">
+                        <button class="btn bg-white text-danger fw-bold" type="submit" style="border-radius: 0 6px 6px 0; color: #ef66ad !important;">Đăng ký</button>
+                    </div>
+                </form>
+                <div class="d-flex gap-2">
+                    <a href="#" class="text-white opacity-90 fs-5"><i class="bi bi-instagram"></i></a>
+                    <a href="#" class="text-white opacity-90 fs-5"><i class="bi bi-facebook"></i></a>
+                    <a href="#" class="text-white opacity-90 fs-5"><i class="bi bi-youtube"></i></a>
+                    <a href="#" class="text-white opacity-90 fs-5"><i class="bi bi-tiktok"></i></a>
+                </div>
+            </div>
+
+            <!-- Cột 2: Cửa Hàng -->
+            <div class="col-lg-2 col-6 col-md-3">
+                <h5 class="fw-bold mb-3">Cửa Hàng</h5>
+                <ul class="list-unstyled small d-flex flex-column gap-2 opacity-90">
+                    <li><a href="index.html#categories" class="text-white">Tất cả sản phẩm</a></li>
+                    <li><a href="dsskincare.html" class="text-white">Chăm sóc da</a></li>
+                    <li><a href="dsmakeup.html" class="text-white">Trang điểm</a></li>
+                    <li><a href="dshaircare.html" class="text-white">Chăm sóc tóc</a></li>
+                </ul>
+            </div>
+
+            <!-- Cột 3: Khách Hàng -->
+            <div class="col-lg-2 col-6 col-md-3">
+                <h5 class="fw-bold mb-3">Khách Hàng</h5>
+                <ul class="list-unstyled small d-flex flex-column gap-2 opacity-90">
+                    <li><a href="#" class="text-white">Theo dõi đơn hàng</a></li>
+                    <li><a href="#" class="text-white">Vận chuyển & Giao hàng</a></li>
+                    <li><a href="#" class="text-white">Đổi trả & Hoàn tiền</a></li>
+                    <li><a href="#" class="text-white">Câu hỏi thường gặp</a></li>
+                </ul>
+            </div>
+
+            <!-- Cột 4: Công Ty -->
+            <div class="col-lg-2 col-6 col-md-3">
+                <h5 class="fw-bold mb-3">Công Ty</h5>
+                <ul class="list-unstyled small d-flex flex-column gap-2 opacity-90">
+                    <li><a href="about.html" class="text-white">Về chúng tôi</a></li>
+                    <li><a href="#" class="text-white">Thành phần</a></li>
+                    <li><a href="#" class="text-white">Tuyển dụng</a></li>
+                    <!-- Dòng chữ Sơ đồ website theo đúng hình mẫu -->
+                    <li><a href="sitemap.html" class="text-white fw-bold text-decoration-underline">Sơ đồ website (Sitemap)</a></li>
+                </ul>
+            </div>
+
+            <!-- Cột 5: Liên Hệ -->
+            <div class="col-lg-3 col-6 col-md-3">
+                <h5 class="fw-bold mb-3">Liên Hệ</h5>
+                <ul class="list-unstyled small d-flex flex-column gap-2 opacity-90">
+                    <li><i class="bi bi-telephone me-2"></i> 1900 1234</li>
+                    <li><i class="bi bi-envelope me-2"></i> hello@iuhbeauty.vn</li>
+                    <li><i class="bi bi-geo-alt me-2"></i> Đại học Công nghiệp TP.HCM</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="border-top border-white border-opacity-25 pt-3 text-center small opacity-90">
+            © 2026 IUH Beauty. Bản quyền của Nguyễn Tuấn Khôi.
+        </div>
+    </div>
+</footer>
+    <script src="../js/bootstrap.bundle.min.js"></script>
+    <script src="./data.js"></script>
+</body>
+</html>

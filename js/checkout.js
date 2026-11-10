@@ -1,307 +1,210 @@
-let dangDatHang = false;
+// File: js/checkout.js
 
-function laySanPhamThanhToan() {
-    let ds = layDuLieu("iuh_checkout_items", []);
-    return Array.isArray(ds) ? ds : [];
+if (typeof ORDERS_STORAGE_KEY === 'undefined') {
+    var ORDERS_STORAGE_KEY = 'IUH_BEAUTY_ORDERS_DATA';
 }
 
-function kiemTraGioHang() {
-    let gioHang = layGioHang();
-    let ds = laySanPhamThanhToan();
-    if (ds.length == 0) return false;
-    let soDongDaChon = 0;
-    for (let i = 0; i < gioHang.length; i++) {
-        if (gioHang[i].selected !== false) soDongDaChon++;
-    }
-    if (soDongDaChon != ds.length) return false;
+document.addEventListener('DOMContentLoaded', function () {
+    renderCheckout();
 
-    for (let i = 0; i < ds.length; i++) {
-        let khop = false;
-        for (let j = 0; j < gioHang.length; j++) {
-            let item = gioHang[j];
-            if (layMaSanPham(item) == String(ds[i].productId) &&
-                item.selected !== false && Number(item.quantity) == Number(ds[i].quantity)) {
-                let sp = timSanPham(layMaSanPham(item), item);
-                khop = sp != null && Number(sp.price) == Number(ds[i].price);
-                break;
-            }
-        }
-        if (!khop) return false;
-    }
-    return true;
-}
-
-function hienThiDonHang() {
-    let ds = laySanPhamThanhToan();
-    let soLuong = 0;
-    let tamTinh = 0;
-    $("#orderItems").empty();
-
-    for (let i = 0; i < ds.length; i++) {
-        let sp = ds[i];
-        let sl = Number(sp.quantity) || 0;
-        let gia = Number(sp.price);
-        if (sl <= 0 || !Number.isFinite(gia) || gia < 0) continue;
-        soLuong += sl;
-        tamTinh += sl * gia;
-
-        let dong = $("<div>").addClass("order-item");
-        let anh = $("<img>").attr("src", sp.image || "../img/no-image.svg")
-            .attr("alt", sp.name || "Sản phẩm")
-            .on("error", function () { anhDuPhong(this); });
-        let thongTin = $("<div>").addClass("order-item-info");
-        thongTin.append($("<h3>").text(sp.name || "Sản phẩm"));
-        thongTin.append($("<p>").text("Số lượng: " + sl + " × " + dinhDangTien(gia)));
-        let thanhTien = $("<strong>").addClass("order-item-price").text(dinhDangTien(sl * gia));
-        dong.append(anh, thongTin, thanhTien);
-        $("#orderItems").append(dong);
+    const checkoutForm = document.getElementById('checkoutForm');
+    if (checkoutForm) {
+        checkoutForm.addEventListener('submit', handleOrderSubmit);
     }
 
-    let phiVanChuyen = tinhPhiVanChuyen(tamTinh);
-    let tongTien = tamTinh + phiVanChuyen;
-    $("#selectedCount").text(soLuong + " sản phẩm");
-    $("#subtotal").text(dinhDangTien(tamTinh));
-    $("#shippingFee").text(tamTinh >= 1000000 ? "Miễn phí" : dinhDangTien(phiVanChuyen));
-    $("#totalPrice").text(dinhDangTien(tongTien));
-    $("#shippingNotice").text(tamTinh >= 1000000
-        ? "Đơn hàng đã đủ điều kiện miễn phí vận chuyển."
-        : "Miễn phí vận chuyển cho đơn hàng từ 1.000.000đ.");
+    const bankRadio = document.getElementById('bank');
+    const codRadio = document.getElementById('cod');
+    const bankNotice = document.getElementById('bankNotice');
 
-    let tongTuCart = layDuLieu("iuh_checkout_totals", null);
-    let tienKhop = tongTuCart != null &&
-        Number(tongTuCart.subtotal) == tamTinh &&
-        Number(tongTuCart.shippingFee) == phiVanChuyen &&
-        Number(tongTuCart.total) == tongTien;
-    let taiKhoan = layDuLieu("iuh_current_user", null);
-    let hopLe = soLuong > 0 && tienKhop && kiemTraGioHang();
-    let thongBao = "";
-    if (!hopLe) {
-        thongBao = "Danh sách sản phẩm đã thay đổi hoặc chưa được chọn. Hãy quay lại Giỏ hàng và nhấn Thanh toán lần nữa.";
-    } else if (!taiKhoan || !taiKhoan.email) {
-        thongBao = "Bạn cần đăng nhập tại Trang chủ trước khi đặt hàng.";
+    if (bankRadio && bankNotice) {
+        bankRadio.addEventListener('change', () => bankNotice.style.display = 'block');
     }
-    $("#checkoutError").text(thongBao).toggle(thongBao != "");
-    $("#btnOrder").prop("disabled", !hopLe || !taiKhoan || !taiKhoan.email || dangDatHang);
-    capNhatSoGioHang();
-    return {items: ds, subtotal: tamTinh, shippingFee: phiVanChuyen, total: tongTien, hopLe: hopLe};
-}
-
-function hienThiTaiKhoan() {
-    let tk = layDuLieu("iuh_current_user", null);
-    if (!tk) return;
-    $("#hoTen").val(tk.name || "");
-    $("#email").val(tk.email || "");
-    let banNhap = layDuLieu("iuh_checkout_draft", null);
-    if (banNhap && banNhap.userEmail == tk.email) {
-        $("#hoTen").val(banNhap.name || tk.name || "");
-        $("#soDT").val(banNhap.phone || "");
-        $("#email").val(banNhap.email || tk.email || "");
-        $("#diaChi").val(banNhap.address || "");
-        $("#ghiChu").val(banNhap.note || "");
-        $("#rememberInfo").prop("checked", true);
+    if (codRadio && bankNotice) {
+        codRadio.addEventListener('change', () => bankNotice.style.display = 'none');
     }
-}
-
-function luuThongTinTam() {
-    if (!$("#rememberInfo").prop("checked")) return;
-    let tk = layDuLieu("iuh_current_user", null);
-    if (!tk || !tk.email) return;
-    let ht = $("#hoTen").val().trim();
-    let sdt = $("#soDT").val().trim();
-    let email = $("#email").val().trim();
-    let diaChi = $("#diaChi").val().trim();
-    if (!/^[\p{L}]+(?:\s+[\p{L}]+)+$/u.test(ht) ||
-        !/^0[0-9]{9}$/.test(sdt) ||
-        !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email) ||
-        diaChi.length < 10) return;
-    luuDuLieu("iuh_checkout_draft", {
-        userEmail: tk.email,
-        name: $("#hoTen").val().trim(),
-        phone: $("#soDT").val().trim(),
-        email: $("#email").val().trim(),
-        address: $("#diaChi").val().trim(),
-        note: $("#ghiChu").val().trim()
-    });
-}
-
-function hienLoi(idInput, idLoi, thongBao) {
-    document.getElementById(idLoi).textContent = thongBao;
-    document.getElementById(idInput).classList.add("is-invalid");
-}
-
-function xoaLoi(idInput, idLoi) {
-    document.getElementById(idLoi).textContent = "";
-    document.getElementById(idInput).classList.remove("is-invalid");
-}
-
-function ktraHoTen() {
-    let ht = document.getElementById("hoTen").value.trim();
-    let regex = /^[\p{L}]+(?:\s+[\p{L}]+)+$/u;
-
-    xoaLoi("hoTen", "loiHoTen");
-    if (ht === "") {
-        hienLoi("hoTen", "loiHoTen", "Họ tên không được để trống.");
-        return false;
-    }
-    if (!regex.test(ht)) {
-        hienLoi("hoTen", "loiHoTen", "Họ tên phải có ít nhất 2 từ và chỉ chứa chữ cái.");
-        return false;
-    }
-    return true;
-}
-
-function ktraSoDT() {
-    let sdt = document.getElementById("soDT").value.trim();
-    let regex = /^0[0-9]{9}$/;
-
-    xoaLoi("soDT", "loiSoDT");
-    if (sdt === "") {
-        hienLoi("soDT", "loiSoDT", "Số điện thoại không được để trống.");
-        return false;
-    }
-    if (!regex.test(sdt)) {
-        hienLoi("soDT", "loiSoDT", "Số điện thoại phải gồm 10 số, bắt đầu bằng 0.");
-        return false;
-    }
-    return true;
-}
-
-function ktraEmail() {
-    let email = document.getElementById("email").value.trim();
-    let regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-
-    xoaLoi("email", "loiEmail");
-    if (email === "") {
-        hienLoi("email", "loiEmail", "Email không được để trống.");
-        return false;
-    }
-    if (!regex.test(email)) {
-        hienLoi("email", "loiEmail", "Email không đúng định dạng.");
-        return false;
-    }
-    return true;
-}
-
-function ktraDiaChi() {
-    let diaChi = document.getElementById("diaChi").value.trim();
-
-    xoaLoi("diaChi", "loiDiaChi");
-    if (diaChi === "") {
-        hienLoi("diaChi", "loiDiaChi", "Địa chỉ không được để trống.");
-        return false;
-    }
-    if (diaChi.length < 10) {
-        hienLoi("diaChi", "loiDiaChi", "Địa chỉ phải có ít nhất 10 ký tự.");
-        return false;
-    }
-    return true;
-}
-
-function kiemTraForm() {
-    let ok1 = ktraHoTen();
-    let ok2 = ktraSoDT();
-    let ok3 = ktraEmail();
-    let ok4 = ktraDiaChi();
-
-    if (!(ok1 && ok2 && ok3 && ok4)) {
-        return false;
-    }
-    return true;
-}
-
-function datHang() {
-    if (dangDatHang) return;
-    if (!kiemTraForm()) {
-        $(".is-invalid").first().trigger("focus");
-        return;
-    }
-    let duLieu = hienThiDonHang();
-    let tk = layDuLieu("iuh_current_user", null);
-    if (!duLieu.hopLe || !tk || !tk.email) {
-        alert("Thông tin giỏ hàng chưa hợp lệ. Hãy quay lại trang Giỏ hàng.");
-        return;
-    }
-
-    dangDatHang = true;
-    $("#btnOrder").prop("disabled", true).text("ĐANG LƯU ĐƠN HÀNG...");
-    let phuongThuc = $("input[name='payment']:checked").val();
-    let maDon = "IUH" + Date.now() + Math.floor(Math.random() * 1000);
-    let donHang = {
-        orderId: maDon,
-        createdAt: new Date().toISOString(),
-        customerEmail: tk.email,
-        receiver: {
-            name: $("#hoTen").val().trim(),
-            phone: $("#soDT").val().trim(),
-            email: $("#email").val().trim(),
-            address: $("#diaChi").val().trim(),
-            note: $("#ghiChu").val().trim()
-        },
-        items: duLieu.items,
-        shippingMethod: "standard",
-        paymentMethod: phuongThuc,
-        subtotal: duLieu.subtotal,
-        shippingFee: duLieu.shippingFee,
-        total: duLieu.total,
-        orderStatus: "placed",
-        paymentStatus: phuongThuc == "COD" ? "unpaid" : "pending"
-    };
-
-    let dsDonHang = layDuLieu("iuh_orders", []);
-    if (!Array.isArray(dsDonHang)) dsDonHang = [];
-    dsDonHang.push(donHang);
-
-    let gioHang = layGioHang();
-    let gioHangConLai = [];
-    for (let i = 0; i < gioHang.length; i++) {
-        if (gioHang[i].selected === false) gioHangConLai.push(gioHang[i]);
-    }
-
-    if (!luuDuLieu("iuh_orders", dsDonHang)) {
-        dangDatHang = false;
-        hienThiDonHang();
-        $("#btnOrder").text("ĐẶT HÀNG");
-        return;
-    }
-    if (!luuDuLieu("iuh_cart", gioHangConLai)) {
-        dsDonHang.pop();
-        luuDuLieu("iuh_orders", dsDonHang);
-        dangDatHang = false;
-        hienThiDonHang();
-        $("#btnOrder").text("ĐẶT HÀNG");
-        return;
-    }
-    try {
-        localStorage.setItem("iuh_last_order_id", maDon);
-    } catch (e) {
-        // Đơn vẫn đã lưu trong iuh_orders; Confirmation có thể tìm theo tài khoản.
-        alert("Đã lưu đơn hàng nhưng không ghi được mã đơn gần nhất. Vui lòng kiểm tra LocalStorage.");
-    }
-    localStorage.removeItem("iuh_checkout_items");
-    localStorage.removeItem("iuh_checkout_totals");
-    if (!$("#rememberInfo").prop("checked")) localStorage.removeItem("iuh_checkout_draft");
-    window.location.href = "confirmation.html";
-}
-
-$(document).ready(function () {
-    hienThiTaiKhoan();
-    hienThiDonHang();
-    $("#hoTen").blur(kiemTraHoTen);
-    $("#soDT").blur(kiemTraSoDT);
-    $("#email").blur(kiemTraEmail);
-    $("#diaChi").blur(kiemTraDiaChi);
-    $("#checkoutForm input, #checkoutForm textarea").on("input change", luuThongTinTam);
-    $("#rememberInfo").change(function () {
-        if ($(this).prop("checked")) luuThongTinTam();
-        else localStorage.removeItem("iuh_checkout_draft");
-    });
-    $("input[name='payment']").change(function () {
-        $("#bankNotice").toggle($("#bank").prop("checked"));
-    });
-    $("#checkoutForm").submit(function (e) {
-        e.preventDefault();
-        datHang();
-    });
 });
 
-$(window).on("pageshow storage", function () { if (!dangDatHang) hienThiDonHang(); });
+// 1. Render danh sách sản phẩm từ giỏ hàng
+function renderCheckout() {
+    let cart = [];
+    try {
+        cart = typeof IUHCart !== 'undefined' ? IUHCart.getCart() : (JSON.parse(localStorage.getItem('IUH_BEAUTY_CART_DATA')) || []);
+    } catch (e) {
+        cart = [];
+    }
+
+    // Lọc các món được tích chọn
+    const selectedItems = cart.filter(item => item.checked === true || item.checked === undefined);
+
+    const orderItemsEl = document.getElementById('orderItems');
+    const selectedCountEl = document.getElementById('selectedCount');
+    const subtotalEl = document.getElementById('subtotal');
+    const shippingFeeEl = document.getElementById('shippingFee');
+    const totalPriceEl = document.getElementById('totalPrice');
+    const btnOrder = document.getElementById('btnOrder');
+    const checkoutError = document.getElementById('checkoutError');
+
+    if (selectedItems.length === 0) {
+        if (orderItemsEl) orderItemsEl.innerHTML = '<p class="text-danger p-3 mb-0">Chưa có sản phẩm nào được chọn từ giỏ hàng.</p>';
+        if (selectedCountEl) selectedCountEl.textContent = '0 sản phẩm';
+        if (subtotalEl) subtotalEl.textContent = '0đ';
+        if (shippingFeeEl) shippingFeeEl.textContent = '0đ';
+        if (totalPriceEl) totalPriceEl.textContent = '0đ';
+        if (btnOrder) btnOrder.disabled = true;
+
+        if (checkoutError) {
+            checkoutError.style.display = 'block';
+            checkoutError.textContent = 'Vui lòng quay lại Giỏ hàng và chọn ít nhất 1 sản phẩm để thanh toán.';
+        }
+        return;
+    }
+
+    if (checkoutError) checkoutError.style.display = 'none';
+
+    let totalQty = 0;
+    let sumMoney = 0;
+    let html = '';
+
+    selectedItems.forEach(item => {
+        totalQty += item.quantity;
+        const itemTotal = item.price * item.quantity;
+        sumMoney += itemTotal;
+
+        html += `
+            <div class="d-flex align-items-center justify-content-between p-2 border-bottom">
+                <div class="d-flex align-items-center gap-2">
+                    <img src="${item.image || '../img/use.png'}" alt="${item.name}" style="width: 50px; height: 50px; object-fit: cover; border-radius: 6px;">
+                    <div>
+                        <h6 class="mb-0 fs-6">${item.name}</h6>
+                        <small class="text-muted">SL: ${item.quantity} x ${item.price.toLocaleString('vi-VN')}đ</small>
+                    </div>
+                </div>
+                <strong class="text-danger fs-6">${itemTotal.toLocaleString('vi-VN')}đ</strong>
+            </div>
+        `;
+    });
+
+    const shipFee = (sumMoney >= 1000000 || sumMoney === 0) ? 0 : 30000;
+    const finalTotal = sumMoney + shipFee;
+
+    if (orderItemsEl) orderItemsEl.innerHTML = html;
+    if (selectedCountEl) selectedCountEl.textContent = `${totalQty} sản phẩm`;
+    if (subtotalEl) subtotalEl.textContent = sumMoney.toLocaleString('vi-VN') + 'đ';
+    if (shippingFeeEl) shippingFeeEl.textContent = shipFee.toLocaleString('vi-VN') + 'đ';
+    if (totalPriceEl) totalPriceEl.textContent = finalTotal.toLocaleString('vi-VN') + 'đ';
+
+    // Mở khóa nút ĐẶT HÀNG
+    if (btnOrder) btnOrder.disabled = false;
+}
+
+// 2. Kiểm tra Regex & Hiển thị lỗi chữ đỏ trên giao diện
+function handleOrderSubmit(e) {
+    e.preventDefault();
+
+    const hoTenInput = document.getElementById('hoTen');
+    const soDTInput = document.getElementById('soDT');
+    const emailInput = document.getElementById('email');
+    const diaChiInput = document.getElementById('diaChi');
+    const ghiChuInput = document.getElementById('ghiChu');
+
+    const hoTen = hoTenInput ? hoTenInput.value.trim() : '';
+    const soDT = soDTInput ? soDTInput.value.trim() : '';
+    const email = emailInput ? emailInput.value.trim() : '';
+    const diaChi = diaChiInput ? diaChiInput.value.trim() : '';
+    const ghiChu = ghiChuInput ? ghiChuInput.value.trim() : '';
+    const paymentMethod = document.querySelector('input[name="payment"]:checked')?.value || 'COD';
+
+    const hoTenError = document.getElementById('hoTenError');
+    const soDTError = document.getElementById('soDTError');
+    const emailError = document.getElementById('emailError');
+    const diaChiError = document.getElementById('diaChiError');
+
+    // Dọn sạch lỗi cũ
+    if (hoTenError) hoTenError.textContent = '';
+    if (soDTError) soDTError.textContent = '';
+    if (emailError) emailError.textContent = '';
+    if (diaChiError) diaChiError.textContent = '';
+
+    // Regex chuẩn
+    const nameRegex = /^(?=.{2,50}$)\p{L}+(?:\s+\p{L}+)+$/u;
+    const phoneRegex = /^0[3|5|7|8|9][0-9]{8}$/;
+    const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+
+    let isValid = true;
+
+    if (!hoTen) {
+        if (hoTenError) hoTenError.textContent = 'Vui lòng nhập Họ và tên!';
+        isValid = false;
+    } else if (!nameRegex.test(hoTen)) {
+        if (hoTenError) hoTenError.textContent = 'Họ tên không hợp lệ (chỉ chứa chữ cái, không chứa số hoặc ký tự đặc biệt).';
+        isValid = false;
+    }
+
+    if (!soDT) {
+        if (soDTError) soDTError.textContent = 'Vui lòng nhập Số điện thoại!';
+        isValid = false;
+    } else if (!phoneRegex.test(soDT)) {
+        if (soDTError) soDTError.textContent = 'Số điện thoại không đúng định dạng VN (phải gồm 10 chữ số, VD: 0988863043).';
+        isValid = false;
+    }
+
+    if (!email) {
+        if (emailError) emailError.textContent = 'Vui lòng nhập Email!';
+        isValid = false;
+    } else if (!emailRegex.test(email)) {
+        if (emailError) emailError.textContent = 'Email không hợp lệ (Ví dụ: name@example.com).';
+        isValid = false;
+    }
+
+    if (!diaChi) {
+        if (diaChiError) diaChiError.textContent = 'Vui lòng nhập Địa chỉ giao hàng!';
+        isValid = false;
+    } else if (diaChi.length < 5) {
+        if (diaChiError) diaChiError.textContent = 'Địa chỉ giao hàng phải từ 5 ký tự trở lên.';
+        isValid = false;
+    }
+
+    if (!isValid) return;
+
+    let cart = typeof IUHCart !== 'undefined' ? IUHCart.getCart() : (JSON.parse(localStorage.getItem('IUH_BEAUTY_CART_DATA')) || []);
+    const selectedItems = cart.filter(item => item.checked === true || item.checked === undefined);
+
+    if (selectedItems.length === 0) {
+        alert('Giỏ hàng chưa có sản phẩm nào được chọn!');
+        return;
+    }
+
+    const subtotal = selectedItems.reduce((sum, i) => sum + (i.price * i.quantity), 0);
+    const shippingFee = (subtotal >= 1000000) ? 0 : 30000;
+    const totalPrice = subtotal + shippingFee;
+
+    const orderData = {
+        orderCode: 'IUH' + Math.floor(100000 + Math.random() * 900000),
+        orderDate: new Date().toLocaleString('vi-VN'),
+        customer: { hoTen, soDT, email, diaChi, ghiChu },
+        paymentMethod: paymentMethod === 'COD' ? 'Thanh toán khi nhận hàng (COD)' : 'Chuyển khoản ngân hàng',
+        paymentStatus: paymentMethod === 'COD' ? 'Chưa thanh toán' : 'Chờ thanh toán',
+        items: selectedItems,
+        subtotal,
+        shippingFee,
+        totalPrice
+    };
+
+    let orders = [];
+    try {
+        orders = JSON.parse(localStorage.getItem(ORDERS_STORAGE_KEY)) || [];
+    } catch (err) { }
+    orders.unshift(orderData);
+
+    localStorage.setItem(ORDERS_STORAGE_KEY, JSON.stringify(orders));
+    localStorage.setItem('IUH_BEAUTY_LATEST_ORDER', JSON.stringify(orderData));
+
+    const remainingCart = cart.filter(item => item.checked === false);
+    if (typeof IUHCart !== 'undefined') {
+        IUHCart.saveCart(remainingCart);
+    } else {
+        localStorage.setItem('IUH_BEAUTY_CART_DATA', JSON.stringify(remainingCart));
+    }
+
+    window.location.href = 'confirmation.html';
+}
