@@ -1,0 +1,1441 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Blog | IUH BEAUTY</title>
+
+    <!-- Bootstrap offline -->
+    <link rel="stylesheet" href="../css/bootstrap.min.css">
+
+    <!-- Icon dùng chung của nhóm -->
+    <link rel="stylesheet" href="../css/icon-don-gian.css">
+
+    <!-- JavaScript giỏ hàng dùng chung -->
+    <script src="../js/cart-storage.js"></script>
+
+    <style>
+
+        /* ==========================================
+           1. THIẾT LẬP CHUNG
+        ========================================== */
+
+        :root {
+            --pink: #ef66ad;
+            --pink-dark: #d94e95;
+            --text: #292529;
+            --gray: #77717a;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            margin: 0;
+            font-family: "Segoe UI", Arial, sans-serif;
+            color: var(--text);
+            background: white;
+        }
+
+        a {
+            text-decoration: none;
+        }
+
+        button {
+            cursor: pointer;
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-family: "Segoe UI", Arial, sans-serif;
+        }
+
+
+        /* ==========================================
+           2. HEADER
+        ========================================== */
+
+        .top-bar {
+            background: var(--pink);
+            color: white;
+            padding: 10px 0;
+            font-size: 12px;
+        }
+
+        .top-bar-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .main-header {
+            background: white;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.06);
+        }
+
+        .navbar-content {
+            min-height: 82px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .logo {
+            color: var(--pink);
+            font-size: 28px;
+            font-weight: bold;
+            letter-spacing: 2px;
+        }
+
+        .logo small {
+            display: block;
+            color: #777;
+            font-size: 9px;
+            letter-spacing: 4px;
+            text-align: center;
+        }
+
+        .main-menu {
+            display: flex;
+            gap: 38px;
+            list-style: none;
+            margin: 0;
+        }
+
+        .main-menu a {
+            color: #292929;
+            font-size: 16px;
+            font-weight: 500;
+        }
+
+        .main-menu a.active,
+        .main-menu a:hover {
+            color: var(--pink);
+        }
+
+
+        /* ==========================================
+           3. DANH SÁCH TIN TỨC
+        ========================================== */
+
+        .news-grid {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 28px;
+        }
+
+        .news-card {
+            background: white;
+            border: 2px solid #f1eaf1;
+            border-radius: 14px;
+            overflow: hidden;
+            cursor: pointer;
+
+            display: flex;
+            flex-direction: column;
+
+            transition:
+                transform 0.3s ease,
+                box-shadow 0.3s ease,
+                border-color 0.3s ease;
+        }
+
+        /* Hiệu ứng khi rê chuột vào bài viết */
+        .news-card:hover {
+            transform: translateY(-6px);
+            border-color: #ef66ad;
+            box-shadow: 0 12px 30px rgba(239, 102, 173, 0.2);
+        }
+
+        /* Khi dùng bàn phím chọn bài viết */
+        .news-card:focus-visible {
+            outline: 3px solid #ef66ad;
+            outline-offset: 4px;
+        }
+
+        .card-image {
+            height: 215px;
+            overflow: hidden;
+        }
+
+        .card-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s;
+        }
+
+        .news-card:hover .card-image img {
+            transform: scale(1.04);
+        }
+
+        .card-content {
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            flex: 1;
+        }
+
+        .card-content h3 {
+            font-size: 19px;
+            font-weight: 600;
+            line-height: 1.5;
+            margin: 12px 0;
+        }
+
+        .card-content p {
+            font-size: 13px;
+            color: var(--gray);
+            line-height: 1.7;
+        }
+
+        .article-category {
+            display: inline-block;
+            align-self: flex-start;
+
+            color: var(--pink-dark);
+            background: #fff0f7;
+
+            padding: 5px 12px;
+            border-radius: 20px;
+
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        .article-date {
+            font-size: 12px;
+            color: #999;
+            margin-top: 10px;
+        }
+
+        .btn-read-article {
+            background: var(--pink);
+            color: white;
+
+            border: none;
+            border-radius: 7px;
+
+            padding: 10px 18px;
+
+            font-size: 13px;
+            font-weight: 600;
+
+            margin-top: auto;
+            align-self: flex-start;
+
+            transition: background 0.2s;
+        }
+
+        .btn-read-article:hover {
+            background: var(--pink-dark);
+            color: white;
+        }
+
+
+        /* ==========================================
+           4. HIỆU ỨNG BÀI VIẾT ĐƯỢC CHỌN
+        ========================================== */
+
+        .news-card {
+            scroll-margin-top: 130px;
+        }
+
+        /* Card được chọn từ trang chủ */
+        .news-card.highlight-article {
+            border: 2px solid #ef66ad;
+            background-color: #fff5fa;
+
+            /* Nhấp nháy liên tục cho đến khi được bấm */
+            animation: highlightPulse 1.2s ease-in-out infinite;
+        }
+
+        /* Hiệu ứng nhấp nháy viền hồng */
+        @keyframes highlightPulse {
+            0%, 100% {
+                border-color: #ef66ad;
+                box-shadow: 0 0 8px rgba(239, 102, 173, 0.2);
+            }
+
+            50% {
+                border-color: #ffb5d9;
+                box-shadow: 0 0 28px rgba(239, 102, 173, 0.7);
+            }
+        }
+
+
+        /* ==========================================
+           5. MODAL CHI TIẾT BÀI VIẾT
+        ========================================== */
+
+        #articleModal .modal-dialog {
+            max-width: 850px;
+        }
+
+        #articleModal .modal-content {
+            border: none;
+            border-radius: 12px;
+            overflow: hidden;
+        }
+
+        #articleModal .modal-header {
+            background: var(--pink);
+            color: white;
+            padding: 18px 25px;
+        }
+
+        #articleModal .modal-title {
+            font-size: 18px;
+            font-weight: 600;
+        }
+
+        #articleModal .modal-body {
+            padding: 28px;
+        }
+
+        #modalTitle {
+            font-size: 27px;
+            font-weight: 650;
+            line-height: 1.4;
+            margin: 18px 0;
+        }
+
+        #modalImage {
+            display: block;
+            width: 100%;
+            height: 340px;
+            object-fit: cover;
+            border-radius: 9px;
+            margin: 20px 0;
+        }
+
+        #modalExcerpt {
+            color: #777;
+            font-size: 14px;
+            line-height: 1.8;
+        }
+
+        #modalContent {
+            font-size: 15px;
+            color: #444;
+            line-height: 1.9;
+        }
+
+        #modalContent p {
+            margin-bottom: 18px;
+            text-align: justify;
+        }
+
+        #articleModal .modal-footer {
+            padding: 15px 25px;
+            border-top: 1px solid #eee;
+        }
+
+        .btn-close-article {
+            background: var(--pink);
+            color: white;
+            border: none;
+            border-radius: 6px;
+            padding: 9px 25px;
+        }
+
+        .btn-close-article:hover {
+            background: var(--pink-dark);
+            color: white;
+        }
+
+
+        /* ==========================================
+           6. FOOTER
+        ========================================== */
+
+        footer {
+            background: #ef66ad;
+            color: white;
+            padding: 45px 0 20px;
+        }
+
+
+        /* ==========================================
+           7. ACTIVE NAVBAR
+        ========================================== */
+
+        .navbar-nav .nav-item .nav-link.active-page {
+            color: #ef66ad !important;
+            font-weight: 700;
+            position: relative;
+        }
+
+        .navbar-nav .nav-item .nav-link.active-page::after {
+            content: "";
+            position: absolute;
+
+            bottom: -2px;
+            left: 0;
+
+            width: 100%;
+            height: 3px;
+
+            background: #ef66ad;
+            border-radius: 2px;
+        }
+
+
+        /* ==========================================
+           8. RESPONSIVE
+        ========================================== */
+
+        @media (max-width: 992px) {
+
+            .news-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+        }
+
+        @media (max-width: 768px) {
+
+            .news-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .card-image {
+                height: 230px;
+            }
+
+            #modalImage {
+                height: 230px;
+            }
+
+            #modalTitle {
+                font-size: 22px;
+            }
+
+            #articleModal .modal-body {
+                padding: 20px;
+            }
+
+            .top-bar-content span:last-child {
+                display: none;
+            }
+
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+
+            html {
+                scroll-behavior: auto;
+            }
+
+            .news-card.highlight-article {
+                animation: none;
+            }
+
+        }
+
+    </style>
+</head>
+
+<body>
+
+    <!-- ==========================================
+         TOP BAR
+    ========================================== -->
+
+    <div class="top-bar">
+
+        <div class="container top-bar-content">
+
+            <span>
+                ♧ Miễn phí vận chuyển cho đơn hàng trên 1.000.000đ
+            </span>
+
+            <span>
+                Theo dõi đơn hàng | Hệ thống cửa hàng | Hỗ trợ
+            </span>
+
+        </div>
+
+    </div>
+
+
+    <!-- ==========================================
+         NAVBAR DÙNG CHUNG VỚI INDEX
+    ========================================== -->
+
+    <nav class="navbar navbar-expand-lg navbar-light bg-white sticky-top shadow-sm py-3">
+
+        <div class="container">
+
+            <!-- Logo -->
+            <a class="navbar-brand fw-bold fs-3"
+               href="index.html"
+               style="color:#ef66ad;letter-spacing:2px;line-height:1.1;">
+
+                IUH
+
+                <small class="d-block text-muted fw-normal"
+                       style="font-size:10px;letter-spacing:4px;">
+                    BEAUTY
+                </small>
+
+            </a>
+
+
+            <!-- Nút menu điện thoại -->
+            <button class="navbar-toggler"
+                    type="button"
+                    data-bs-toggle="collapse"
+                    data-bs-target="#navMenu"
+                    aria-controls="navMenu"
+                    aria-expanded="false"
+                    aria-label="Mở menu">
+
+                <span class="navbar-toggler-icon"></span>
+
+            </button>
+
+
+            <div class="collapse navbar-collapse" id="navMenu">
+
+                <!-- Menu chính -->
+                <ul class="navbar-nav mx-auto gap-lg-4">
+
+                    <li class="nav-item">
+                        <a class="nav-link text-dark fw-semibold"
+                           href="index.html">
+                            Home
+                        </a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link text-dark fw-semibold"
+                           href="index.html#categories">
+                            Shop
+                        </a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link text-dark fw-semibold"
+                           href="dsmakeup.html">
+                            Makeup
+                        </a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link text-dark fw-semibold"
+                           href="dsskincare.html">
+                            Skincare
+                        </a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link text-dark fw-semibold"
+                           href="dshaircare.html">
+                            Haircare
+                        </a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link text-dark fw-semibold"
+                           href="about.html">
+                            About Us
+                        </a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link text-dark fw-semibold active-page"
+                           href="blog.html">
+                            Blog
+                        </a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link text-dark fw-semibold"
+                           href="dangky.html">
+                            Đăng ký
+                        </a>
+                    </li>
+
+                </ul>
+
+
+                <!-- Icon -->
+                <div class="navbar-icons d-flex align-items-center gap-3 mt-3 mt-lg-0">
+
+                    <a href="index.html#searchCollapse"
+                       class="text-dark fs-5"
+                       title="Tìm kiếm">
+
+                        <i class="bi bi-search"></i>
+
+                    </a>
+
+                    <a href="taikhoan.html" class="text-dark fs-5"><i class="bi bi-person"></i></a>
+
+                    <a href="cart.html"
+                       class="position-relative text-dark fs-5"
+                       title="Giỏ hàng">
+
+                        <i class="bi bi-bag"></i>
+
+                        <span class="badge bg-danger rounded-pill position-absolute top-0 start-100 translate-middle"
+                              id="cartCount">
+                            0
+                        </span>
+
+                    </a>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </nav>
+
+
+    <!-- ==========================================
+         NỘI DUNG BLOG
+    ========================================== -->
+
+    <main class="container py-5">
+
+        <!-- Tiêu đề -->
+        <div class="text-center mb-5">
+
+            <h1 class="fw-bold">
+                Tin Tức & Cẩm Nang Làm Đẹp
+            </h1>
+
+            <p class="text-muted">
+                Cùng IUH Beauty khám phá bí quyết dưỡng da
+                và trang điểm tự nhiên
+            </p>
+
+        </div>
+
+
+        <!-- Danh sách bài viết -->
+        <div class="news-grid" id="newsGrid">
+
+            <!-- JavaScript tự động hiển thị bài viết -->
+
+        </div>
+
+    </main>
+
+
+    <!-- ==========================================
+         MODAL CHI TIẾT BÀI VIẾT
+    ========================================== -->
+
+    <div class="modal fade"
+         id="articleModal"
+         tabindex="-1"
+         aria-labelledby="articleModalLabel"
+         aria-hidden="true">
+
+        <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
+
+            <div class="modal-content">
+
+                <!-- Header -->
+                <div class="modal-header">
+
+                    <h5 class="modal-title" id="articleModalLabel">
+                        Chi tiết bài viết
+                    </h5>
+
+                    <button type="button"
+                            class="btn-close btn-close-white"
+                            data-bs-dismiss="modal"
+                            aria-label="Đóng">
+                    </button>
+
+                </div>
+
+
+                <!-- Body -->
+                <div class="modal-body">
+
+                    <!-- Danh mục -->
+                    <span class="article-category"
+                          id="modalCategory">
+                    </span>
+
+                    <!-- Tiêu đề -->
+                    <h2 id="modalTitle"></h2>
+
+                    <!-- Ngày đăng -->
+                    <p class="text-muted small">
+
+                        Ngày đăng:
+                        <span id="modalDate"></span>
+
+                        &nbsp; | &nbsp;
+
+                        Tác giả: IUH BEAUTY
+
+                    </p>
+
+                    <!-- Ảnh -->
+                    <img id="modalImage"
+                         src=""
+                         alt="Ảnh bài viết">
+
+                    <!-- Mô tả -->
+                    <p id="modalExcerpt"></p>
+
+                    <hr>
+
+                    <!-- Nội dung -->
+                    <div id="modalContent"></div>
+
+                </div>
+
+
+                <!-- Footer Modal -->
+                <div class="modal-footer">
+
+                    <button type="button"
+                            class="btn-close-article"
+                            data-bs-dismiss="modal">
+
+                        Đóng
+
+                    </button>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- ==========================================
+         FOOTER DÙNG CHUNG
+    ========================================== -->
+
+    <footer class="pt-5 pb-3 text-white"
+            style="background-color:#ef66ad;">
+
+        <div class="container">
+
+            <div class="row g-4 mb-4">
+
+                <!-- Cột 1 -->
+                <div class="col-lg-3 col-md-6">
+
+                    <h5 class="fw-bold mb-3">
+                        Luôn Rạng Rỡ
+                    </h5>
+
+                    <p class="small opacity-90 mb-3">
+                        Đăng ký nhận bản tin và nhận ưu đãi
+                        10% cho đơn đầu tiên.
+                    </p>
+
+                    <form action="#" class="mb-3">
+
+                        <div class="input-group">
+
+                            <input type="email"
+                                   class="form-control border-0"
+                                   placeholder="Email của bạn"
+                                   required>
+
+                            <button class="btn bg-white fw-bold"
+                                    type="submit"
+                                    style="color:#ef66ad;">
+
+                                Đăng ký
+
+                            </button>
+
+                        </div>
+
+                    </form>
+
+                    <div class="d-flex gap-2">
+
+                        <a href="#" class="text-white fs-5">
+                            <i class="bi bi-instagram"></i>
+                        </a>
+
+                        <a href="#" class="text-white fs-5">
+                            <i class="bi bi-facebook"></i>
+                        </a>
+
+                        <a href="#" class="text-white fs-5">
+                            <i class="bi bi-youtube"></i>
+                        </a>
+
+                        <a href="#" class="text-white fs-5">
+                            <i class="bi bi-tiktok"></i>
+                        </a>
+
+                    </div>
+
+                </div>
+
+
+                <!-- Cột 2 -->
+                <div class="col-lg-2 col-6 col-md-3">
+
+                    <h5 class="fw-bold mb-3">
+                        Cửa Hàng
+                    </h5>
+
+                    <ul class="list-unstyled small d-flex flex-column gap-2">
+
+                        <li>
+                            <a href="index.html#categories" class="text-white">
+                                Tất cả sản phẩm
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="dsskincare.html" class="text-white">
+                                Chăm sóc da
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="dsmakeup.html" class="text-white">
+                                Trang điểm
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="dshaircare.html" class="text-white">
+                                Chăm sóc tóc
+                            </a>
+                        </li>
+
+                    </ul>
+
+                </div>
+
+
+                <!-- Cột 3 -->
+                <div class="col-lg-2 col-6 col-md-3">
+
+                    <h5 class="fw-bold mb-3">
+                        Khách Hàng
+                    </h5>
+
+                    <ul class="list-unstyled small d-flex flex-column gap-2">
+
+                        <li>
+                            <a href="#" class="text-white">
+                                Theo dõi đơn hàng
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="#" class="text-white">
+                                Vận chuyển & Giao hàng
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="#" class="text-white">
+                                Đổi trả & Hoàn tiền
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="#" class="text-white">
+                                Câu hỏi thường gặp
+                            </a>
+                        </li>
+
+                    </ul>
+
+                </div>
+
+
+                <!-- Cột 4 -->
+                <div class="col-lg-2 col-6 col-md-3">
+
+                    <h5 class="fw-bold mb-3">
+                        Công Ty
+                    </h5>
+
+                    <ul class="list-unstyled small d-flex flex-column gap-2">
+
+                        <li>
+                            <a href="about.html" class="text-white">
+                                Về chúng tôi
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="#" class="text-white">
+                                Thành phần
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="#" class="text-white">
+                                Tuyển dụng
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="sitemap.html"
+                               class="text-white fw-bold text-decoration-underline">
+
+                                Sơ đồ website (Sitemap)
+
+                            </a>
+                        </li>
+
+                    </ul>
+
+                </div>
+
+
+                <!-- Cột 5 -->
+                <div class="col-lg-3 col-6 col-md-3">
+
+                    <h5 class="fw-bold mb-3">
+                        Liên Hệ
+                    </h5>
+
+                    <ul class="list-unstyled small d-flex flex-column gap-2">
+
+                        <li>
+                            <i class="bi bi-telephone me-2"></i>
+                            1900 1234
+                        </li>
+
+                        <li>
+                            <i class="bi bi-envelope me-2"></i>
+                            hello@iuhbeauty.vn
+                        </li>
+
+                        <li>
+                            <i class="bi bi-geo-alt me-2"></i>
+                            Đại học Công nghiệp TP.HCM
+                        </li>
+
+                    </ul>
+
+                </div>
+
+            </div>
+
+
+            <div class="border-top border-white border-opacity-25 pt-3 text-center small">
+
+                © 2026 IUH Beauty. Bản quyền của Nguyễn Tuấn Khôi.
+
+            </div>
+
+        </div>
+
+    </footer>
+
+
+    <!-- ==========================================
+         JAVASCRIPT
+    ========================================== -->
+
+    <!-- Bootstrap offline -->
+    <script src="../js/bootstrap.bundle.min.js"></script>
+
+    <!-- Dữ liệu chung của nhóm -->
+    <script src="./data.js"></script>
+
+    <script>
+
+        // ==========================================
+        // 1. NỘI DUNG CHI TIẾT CÁC BÀI VIẾT
+        // ==========================================
+
+        const articleDetails = {
+
+            1: [
+                "Trong quá trình chăm sóc da, việc lựa chọn mỹ phẩm phù hợp không chỉ dựa vào thương hiệu mà còn phụ thuộc vào thành phần của sản phẩm. Hiểu rõ các thành phần dưỡng da sẽ giúp người dùng xây dựng chu trình chăm sóc da phù hợp với nhu cầu của bản thân.",
+
+                "Hyaluronic Acid và Glycerin là hai thành phần thường được sử dụng trong các sản phẩm cấp ẩm. Chúng giúp duy trì độ ẩm và cải thiện cảm giác khô căng trên bề mặt da.",
+
+                "Niacinamide là một dạng vitamin B3, thường có trong các sản phẩm hỗ trợ hàng rào bảo vệ da. Ceramide cũng đóng vai trò quan trọng trong việc duy trì hàng rào bảo vệ tự nhiên của da.",
+
+                "Bên cạnh đó, Vitamin C được sử dụng trong nhiều sản phẩm chăm sóc da với mục đích chống oxy hóa và hỗ trợ cải thiện vẻ ngoài xỉn màu.",
+
+                "Tuy nhiên, không phải làn da nào cũng cần sử dụng tất cả những thành phần trên. Người dùng nên lựa chọn sản phẩm phù hợp và thử nghiệm cẩn thận trước khi bổ sung vào chu trình chăm sóc da."
+            ],
+
+            2: [
+                "Chăm sóc da vào buổi sáng và buổi tối có những mục đích khác nhau. Việc hiểu rõ sự khác biệt giữa hai thời điểm sẽ giúp người dùng xây dựng chu trình chăm sóc da hợp lý hơn.",
+
+                "Vào buổi sáng, làn da cần được làm sạch nhẹ nhàng, dưỡng ẩm và bảo vệ trước tác động từ môi trường. Một chu trình cơ bản thường bao gồm sữa rửa mặt, kem dưỡng ẩm và kem chống nắng.",
+
+                "Kem chống nắng là bước quan trọng trong quá trình chăm sóc da ban ngày, giúp hạn chế tác động của tia cực tím lên làn da.",
+
+                "Trong khi đó, buổi tối là thời điểm tập trung làm sạch bụi bẩn, dầu thừa và lớp trang điểm tích tụ sau một ngày dài. Sau khi làm sạch, người dùng có thể bổ sung các sản phẩm dưỡng ẩm hoặc chăm sóc chuyên biệt phù hợp.",
+
+                "Điều quan trọng nhất là duy trì một chu trình đơn giản, phù hợp với loại da và thực hiện đều đặn mỗi ngày."
+            ],
+
+            3: [
+                "Làm đẹp bền vững là xu hướng được nhiều người quan tâm khi nhu cầu chăm sóc bản thân ngày càng gắn liền với ý thức bảo vệ môi trường.",
+
+                "Một trong những cách đơn giản nhất để bắt đầu là sử dụng hết sản phẩm đang có trước khi mua sản phẩm mới. Điều này giúp hạn chế lãng phí mỹ phẩm và giảm lượng rác thải phát sinh.",
+
+                "Người dùng cũng có thể ưu tiên các sản phẩm có bao bì dễ tái chế, lựa chọn dung tích phù hợp và hạn chế mua những sản phẩm có công dụng trùng lặp.",
+
+                "Bên cạnh đó, việc tìm hiểu nguồn gốc sản phẩm và những thông tin do thương hiệu công bố sẽ giúp người tiêu dùng đưa ra quyết định mua sắm có cân nhắc hơn.",
+
+                "Làm đẹp bền vững không nhất thiết phải bắt đầu từ những thay đổi lớn. Những thói quen nhỏ được duy trì lâu dài có thể góp phần xây dựng lối sống tiêu dùng có trách nhiệm hơn."
+            ]
+
+        };
+
+
+        // ==========================================
+        // 2. TÊN DANH MỤC
+        // ==========================================
+
+        const categoryNames = {
+            skincare: "Chăm sóc da",
+            makeup: "Trang điểm",
+            ingredients: "Thành phần",
+            lifestyle: "Sống xanh & Xu hướng"
+        };
+
+
+        // ==========================================
+        // 3. LẤY DỮ LIỆU TIN TỨC
+        // ==========================================
+
+        const newsGrid = document.getElementById("newsGrid");
+
+        const storageKey = "IUHBeautyNewsV5";
+
+        let articles = [];
+
+        try {
+
+            const savedData = JSON.parse(
+                localStorage.getItem(storageKey) || "null"
+            );
+
+            if (Array.isArray(savedData) && savedData.length > 0) {
+
+                articles = savedData;
+
+            } else if (typeof iuhBeautyBlogData !== "undefined") {
+
+                articles = iuhBeautyBlogData;
+
+                localStorage.setItem(
+                    storageKey,
+                    JSON.stringify(articles)
+                );
+
+            }
+
+        } catch (error) {
+
+            if (typeof iuhBeautyBlogData !== "undefined") {
+                articles = iuhBeautyBlogData;
+            }
+
+        }
+
+
+        // ==========================================
+        // 4. HÀM XỬ LÝ VĂN BẢN
+        // ==========================================
+
+        function escapeHTML(text) {
+
+            return String(text ?? "").replace(
+                /[&<>"']/g,
+                function (character) {
+
+                    const characters = {
+                        "&": "&amp;",
+                        "<": "&lt;",
+                        ">": "&gt;",
+                        '"': "&quot;",
+                        "'": "&#39;"
+                    };
+
+                    return characters[character];
+
+                }
+            );
+
+        }
+
+
+        // ==========================================
+        // 5. ĐỊNH DẠNG NGÀY
+        // ==========================================
+
+        function formatDate(dateString) {
+
+            const date = new Date(dateString + "T00:00:00");
+
+            return date.toLocaleDateString("vi-VN");
+
+        }
+
+
+        // ==========================================
+        // 6. HIỂN THỊ DANH SÁCH TIN TỨC
+        // ==========================================
+
+        function renderArticles() {
+
+            newsGrid.innerHTML = "";
+
+            if (articles.length === 0) {
+
+                newsGrid.innerHTML = `
+                    <div class="text-center py-5"
+                         style="grid-column:1/-1;">
+
+                        <h4>Chưa có bài viết</h4>
+
+                        <p class="text-muted">
+                            Dữ liệu tin tức chưa được khởi tạo.
+                        </p>
+
+                    </div>
+                `;
+
+                return;
+            }
+
+
+            articles.forEach(function (article) {
+
+                const card = document.createElement("article");
+
+                card.className = "news-card shadow-sm";
+
+                // Gắn ID cho từng bài viết
+                card.id = "article-" + article.id;
+
+                // Gắn ID bài viết vào toàn bộ card
+                card.dataset.articleId = article.id;
+
+                // Cho phép nhấn vào card
+                card.setAttribute("role", "button");
+                card.setAttribute("tabindex", "0");
+                card.setAttribute(
+                    "aria-label",
+                    "Đọc bài viết: " + article.title
+                );
+
+
+                card.innerHTML = `
+
+                    <div class="card-image">
+
+                        <img
+                            src="../img/${escapeHTML(article.image)}"
+                            alt="${escapeHTML(article.title)}"
+                            loading="lazy"
+                        >
+
+                    </div>
+
+
+                    <div class="card-content">
+
+                        <span class="article-category">
+
+                            ${escapeHTML(
+                                categoryNames[article.category] || "Tin tức"
+                            )}
+
+                        </span>
+
+
+                        <div class="article-date">
+
+                            ${formatDate(article.date)}
+
+                            &nbsp; • &nbsp;
+
+                            ${Number(article.minutes) || 4} phút đọc
+
+                        </div>
+
+
+                        <h3>
+
+                            ${escapeHTML(article.title)}
+
+                        </h3>
+
+
+                        <p>
+
+                            ${escapeHTML(article.excerpt)}
+
+                        </p>
+
+                    </div>
+
+                `;
+
+
+                newsGrid.appendChild(card);
+
+            });
+
+        }
+
+
+        // ==========================================
+        // 7. KHỞI TẠO BOOTSTRAP MODAL
+        // ==========================================
+
+        const articleModalElement =
+            document.getElementById("articleModal");
+
+        const articleModal =
+            new bootstrap.Modal(articleModalElement);
+
+
+        // ==========================================
+        // 8. HIỂN THỊ NỘI DUNG CHI TIẾT
+        // ==========================================
+
+        function showArticleDetail(id) {
+
+            // Tìm bài viết được chọn
+            const article = articles.find(function (item) {
+
+                return Number(item.id) === Number(id);
+
+            });
+
+
+            if (!article) {
+                return;
+            }
+
+
+            // Hiển thị danh mục
+            document.getElementById("modalCategory").textContent =
+                categoryNames[article.category] || "Tin tức";
+
+
+            // Hiển thị tiêu đề
+            document.getElementById("modalTitle").textContent =
+                article.title;
+
+
+            // Hiển thị ngày đăng
+            document.getElementById("modalDate").textContent =
+                formatDate(article.date);
+
+
+            // Hiển thị hình ảnh
+            const modalImage =
+                document.getElementById("modalImage");
+
+            modalImage.src = "../img/" + article.image;
+
+            modalImage.alt = article.title;
+
+
+            // Hiển thị mô tả
+            document.getElementById("modalExcerpt").textContent =
+                article.excerpt;
+
+
+            // Lấy nội dung chi tiết
+            const content =
+                Array.isArray(article.body) && article.body.length > 0
+                    ? article.body
+                    : articleDetails[article.id] || [article.excerpt];
+
+
+            // Hiển thị nội dung
+            const modalContent =
+                document.getElementById("modalContent");
+
+            modalContent.replaceChildren();
+
+
+            content.forEach(function (paragraph) {
+
+                const p = document.createElement("p");
+
+                p.textContent = paragraph;
+
+                modalContent.appendChild(p);
+
+            });
+
+
+            // Đưa thanh cuộn Modal về đầu
+            articleModalElement.querySelector(".modal-body").scrollTop = 0;
+
+
+            // Mở Modal
+            articleModal.show();
+
+        }
+
+
+        // ==========================================
+        // 9. SỰ KIỆN NHẤN XEM CHI TIẾT
+        // ==========================================
+
+        // ==========================================
+// NHẤN VÀO BẤT KỲ VỊ TRÍ NÀO TRÊN CARD
+// ==========================================
+
+function openArticleFromCard(card) {
+
+    if (!card) {
+        return;
+    }
+
+    // Lấy ID của bài viết
+    const articleId = Number(card.dataset.articleId);
+
+    // Tắt hiệu ứng nhấp nháy
+    card.classList.remove("highlight-article");
+
+    // Mở Modal chi tiết
+    showArticleDetail(articleId);
+
+}
+
+
+        // Xử lý khi nhấn chuột
+        newsGrid.addEventListener("click", function (event) {
+
+            // Tìm card gần nhất được nhấn
+            const card = event.target.closest(".news-card");
+
+            openArticleFromCard(card);
+
+        });
+
+
+        // Xử lý khi nhấn Enter hoặc Space
+        newsGrid.addEventListener("keydown", function (event) {
+
+            if (event.key !== "Enter" && event.key !== " ") {
+                return;
+            }
+
+            const card = event.target.closest(".news-card");
+
+            if (!card) {
+                return;
+            }
+
+            event.preventDefault();
+
+            openArticleFromCard(card);
+
+        });
+
+
+        // ==========================================
+        // 10. NHẬN ID BÀI VIẾT TỪ TRANG CHỦ
+        // ==========================================
+
+        function highlightArticleFromHome() {
+
+            // Ví dụ: blog.html?id=2
+            const urlParams =
+                new URLSearchParams(window.location.search);
+
+            const selectedId = urlParams.get("id");
+
+
+            // Không có ID thì hiển thị Blog bình thường
+            if (!selectedId) {
+                return;
+            }
+
+
+            // Chỉ chấp nhận ID là số nguyên dương
+            if (!/^[1-9]\d*$/.test(selectedId)) {
+                return;
+            }
+
+
+            // Tìm card tương ứng
+            const selectedArticle = document.getElementById(
+                "article-" + selectedId
+            );
+
+
+            if (!selectedArticle) {
+                return;
+            }
+
+
+            // Thêm hiệu ứng nổi bật
+            selectedArticle.classList.add("highlight-article");
+
+
+            // Cuộn tới bài viết
+            setTimeout(function () {
+
+                selectedArticle.scrollIntoView({
+
+                    behavior: "smooth",
+
+                    block: "center"
+
+                });
+
+            }, 250);
+
+        }
+
+
+        // ==========================================
+        // 11. HIỂN THỊ DANH SÁCH BAN ĐẦU
+        // ==========================================
+
+        renderArticles();
+
+
+        // ==========================================
+        // 12. LÀM NỔI BẬT BÀI TỪ TRANG CHỦ
+        // ==========================================
+
+        window.addEventListener("load", function () {
+
+            highlightArticleFromHome();
+
+        });
+
+
+        // ==========================================
+        // 13. CẬP NHẬT SỐ LƯỢNG GIỎ HÀNG
+        // ==========================================
+
+        // Phần này tiếp tục sử dụng cart-storage.js
+        // có sẵn trong dự án của nhóm.
+
+    </script>
+
+</body>
+
+</html>

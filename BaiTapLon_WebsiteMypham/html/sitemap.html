@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SƠ ĐỒ WEBSITE (SITEMAP) - IUH BEAUTY</title>
+    <link href="../css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../css/icon-don-gian.css">
+    <style>
+        :root {
+            --primary: #ef66ad;
+            --primary-dark: #d84b93;
+            --line-color: #ef66ad;
+            --bg-soft: #fcf4f8;
+        }
+
+        body {
+            font-family: 'Segoe UI', Arial, sans-serif;
+            background-color: var(--bg-soft);
+            color: #2c2c2c;
+            padding: 40px 20px;
+        }
+
+        a { text-decoration: none; display: block; color: inherit; }
+
+        .sitemap-header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .sitemap-header h1 {
+            color: var(--primary);
+            font-weight: 800;
+            letter-spacing: 1px;
+        }
+
+        /* Node gốc (Trang chủ) */
+        .root-node {
+            display: flex;
+            justify-content: center;
+            position: relative;
+            margin-bottom: 40px;
+        }
+
+        .root-card {
+            background: var(--primary);
+            color: white;
+            padding: 15px 30px;
+            border-radius: 8px;
+            text-align: center;
+            box-shadow: 0 4px 12px rgba(239, 102, 173, 0.3);
+            min-width: 200px;
+            transition: transform 0.2s;
+        }
+
+        .root-card:hover {
+            transform: translateY(-3px);
+            background: var(--primary-dark);
+            color: white;
+        }
+
+        /* Đường kẻ dọc từ Trang chủ xuống thanh ngang */
+        .root-node::after {
+            content: '';
+            position: absolute;
+            bottom: -40px;
+            left: 50%;
+            width: 2px;
+            height: 40px;
+            background-color: var(--line-color);
+        }
+
+        /* Container của các cột nhánh */
+        .tree-branches {
+            display: flex;
+            justify-content: space-around;
+            position: relative;
+            padding-top: 20px;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        /* Thanh ngang nối tất cả các nhánh */
+        .tree-branches::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 10%;
+            right: 10%;
+            height: 2px;
+            background-color: var(--line-color);
+        }
+
+        .branch-column {
+            flex: 1;
+            margin: 0 10px;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        /* Đường kẻ từ thanh ngang xuống từng Label nhóm */
+        .branch-column::before {
+            content: '';
+            position: absolute;
+            top: -20px;
+            left: 50%;
+            width: 2px;
+            height: 20px;
+            background-color: var(--line-color);
+        }
+
+        /* Label tên nhóm */
+        .group-label {
+            background: #fff;
+            border: 1px solid #ddd;
+            padding: 4px 15px;
+            border-radius: 4px;
+            font-size: 0.85rem;
+            font-weight: 700;
+            color: #555;
+            margin-bottom: 15px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+
+        /* Danh sách nút bài viết/trang con */
+        .node-list {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .node-card {
+            background: #ffffff;
+            border: 2px solid var(--primary);
+            border-radius: 8px;
+            padding: 12px;
+            text-align: center;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.04);
+            transition: all 0.2s ease;
+        }
+
+        .node-card:hover {
+            background: #fff0f7;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 10px rgba(239, 102, 173, 0.2);
+        }
+
+        /* Tông màu vàng làm nổi bật Luồng Đặt Hàng */
+        .node-card.gold-theme {
+            background: #fffdf5;
+            border-color: #f39c12;
+        }
+        .node-card.gold-theme:hover {
+            background: #fff9e6;
+            box-shadow: 0 4px 10px rgba(243, 156, 18, 0.25);
+        }
+
+        .node-title {
+            font-weight: 700;
+            font-size: 0.95rem;
+            margin-bottom: 2px;
+        }
+
+        .node-file {
+            font-size: 0.78rem;
+            color: #777;
+        }
+
+        .btn-back {
+            display: inline-block;
+            margin-top: 50px;
+            padding: 8px 24px;
+            border: 1px solid var(--primary);
+            color: var(--primary);
+            border-radius: 6px;
+            background: #fff;
+            font-weight: 600;
+            transition: all 0.2s;
+        }
+
+        .btn-back:hover {
+            background: var(--primary);
+            color: #fff;
+        }
+
+        /* Scrollbar cho cột chi tiết sản phẩm */
+        .scrollable-nodes {
+            max-height: 520px;
+            overflow-y: auto;
+            padding-right: 5px;
+        }
+        .scrollable-nodes::-webkit-scrollbar {
+            width: 5px;
+        }
+        .scrollable-nodes::-webkit-scrollbar-thumb {
+            background: var(--primary);
+            border-radius: 4px;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Tiêu đề Sơ đồ -->
+    <div class="sitemap-header">
+        <h1>SƠ ĐỒ WEBSITE (SITEMAP)</h1>
+        <p class="text-muted">Mối quan hệ giữa các trang trên IUH BEAUTY</p>
+    </div>
+
+    <!-- Nút Gốc: TRANG CHỦ -->
+    <div class="root-node">
+        <a href="index.html" class="root-card">
+            <div class="node-title">🏠 TRANG CHỦ</div>
+            <div class="node-file" style="opacity: 0.9;">index.html</div>
+        </a>
+    </div>
+
+    <!-- Cây sơ đồ chia 4 Nhánh -->
+    <div class="tree-branches">
+        
+        <!-- Nhánh 1: Thông Tin & Tài Khoản -->
+        <div class="branch-column">
+            <div class="group-label">Thông Tin & Tài Khoản</div>
+            <div class="node-list">
+                <a href="about.html" class="node-card">
+                    <div class="node-title">Giới thiệu</div>
+                    <div class="node-file">about.html</div>
+                </a>
+                <a href="Blog.html" class="node-card">
+                    <div class="node-title">Tin tức & Bài viết</div>
+                    <div class="node-file">Blog.html</div>
+                </a>
+                <a href="dangky.html" class="node-card">
+                    <div class="node-title">Đăng ký tài khoản</div>
+                    <div class="node-file">dangky.html</div>
+                </a>
+                <a href="dangnhap.html" class="node-card">
+                    <div class="node-title">Đăng nhập</div>
+                    <div class="node-file">dangnhap.html</div>
+                </a>
+                <a href="taikhoan.html" class="node-card">
+                    <div class="node-title">Tài khoản của tôi</div>
+                    <div class="node-file">taikhoan.html</div>
+                </a>
+            </div>
+        </div>
+
+        <!-- Nhánh 2: Danh Mục Sản Phẩm -->
+        <div class="branch-column">
+            <div class="group-label">Danh Mục Sản Phẩm</div>
+            <div class="node-list">
+                <a href="dsmakeup.html" class="node-card">
+                    <div class="node-title">Trang Điểm (Makeup)</div>
+                    <div class="node-file">dsmakeup.html</div>
+                </a>
+                <a href="dsskincare.html" class="node-card">
+                    <div class="node-title">Chăm Sóc Da (Skincare)</div>
+                    <div class="node-file">dsskincare.html</div>
+                </a>
+                <a href="dshaircare.html" class="node-card">
+                    <div class="node-title">Chăm Sóc Tóc (Haircare)</div>
+                    <div class="node-file">dshaircare.html</div>
+                </a>
+            </div>
+        </div>
+
+        <!-- Nhánh 3: Chi Tiết Sản Phẩm (16 Item) -->
+        <div class="branch-column">
+            <div class="group-label">Chi Tiết Sản Phẩm</div>
+            <div class="node-list scrollable-nodes">
+                <!-- Makeup -->
+                <a href="chi-tiet-son-li-velvet-tint.html" class="node-card">
+                    <div class="node-title">Son Lì Velvet Tint</div>
+                    <div class="node-file">chi-tiet-son-li-velvet-tint.html</div>
+                </a>
+                <a href="chi-tiet-phan-nuoc-cushion-glossy.html" class="node-card">
+                    <div class="node-title">Phấn Nước Cushion Glossy</div>
+                    <div class="node-file">chi-tiet-phan-nuoc-cushion-glossy.html</div>
+                </a>
+                <a href="chi-tiet-bang-phan-mat-12-o.html" class="node-card">
+                    <div class="node-title">Bảng Phấn Mắt 12 Ô</div>
+                    <div class="node-file">chi-tiet-bang-phan-mat-12-o.html</div>
+                </a>
+                <a href="chi-tiet-mascara-cong-day-mi.html" class="node-card">
+                    <div class="node-title">Mascara Cong Dày Mi</div>
+                    <div class="node-file">chi-tiet-mascara-cong-day-mi.html</div>
+                </a>
+                <a href="chi-tiet-phan-ma-hong.html" class="node-card">
+                    <div class="node-title">Phấn Má Hồng</div>
+                    <div class="node-file">chi-tiet-phan-ma-hong.html</div>
+                </a>
+                <a href="chi-tiet-kem-lot-kiem-dau.html" class="node-card">
+                    <div class="node-title">Kem Lót Kiềm Dầu</div>
+                    <div class="node-file">chi-tiet-kem-lot-kiem-dau.html</div>
+                </a>
+                <!-- Skincare -->
+                <a href="chi-tiet-serum-duong-sang.html" class="node-card">
+                    <div class="node-title">Serum Dưỡng Sáng</div>
+                    <div class="node-file">chi-tiet-serum-duong-sang.html</div>
+                </a>
+                <a href="chi-tiet-sua-rua-mat.html" class="node-card">
+                    <div class="node-title">Sữa Rửa Mặt Tạo Bọt</div>
+                    <div class="node-file">chi-tiet-sua-rua-mat.html</div>
+                </a>
+                <a href="chi-tiet-tay-te-bao-chet.html" class="node-card">
+                    <div class="node-title">Tẩy Tế Bào Chết</div>
+                    <div class="node-file">chi-tiet-tay-te-bao-chet.html</div>
+                </a>
+                <a href="chi-tiet-kem-duong-am.html" class="node-card">
+                    <div class="node-title">Kem Dưỡng Ẩm Chuyên Sâu</div>
+                    <div class="node-file">chi-tiet-kem-duong-am.html</div>
+                </a>
+                <a href="chi-tiet-nuoc-hoa-hong.html" class="node-card">
+                    <div class="node-title">Nước Hoa Hồng Dịu Nhẹ</div>
+                    <div class="node-file">chi-tiet-nuoc-hoa-hong.html</div>
+                </a>
+                <a href="chi-tiet-kem-chong-nang.html" class="node-card">
+                    <div class="node-title">Kem Chống Nắng SPF50+</div>
+                    <div class="node-file">chi-tiet-kem-chong-nang.html</div>
+                </a>
+                <!-- Haircare -->
+                <a href="chi-tiet-dau-duong-toc.html" class="node-card">
+                    <div class="node-title">Dầu Dưỡng Tóc</div>
+                    <div class="node-file">chi-tiet-dau-duong-toc.html</div>
+                </a>
+                <a href="chi-tiet-dau-goi-argan.html" class="node-card">
+                    <div class="node-title">Dầu Gội Phục Hồi Argan</div>
+                    <div class="node-file">chi-tiet-dau-goi-argan.html</div>
+                </a>
+                <a href="chi-tiet-dau-xa-keratin.html" class="node-card">
+                    <div class="node-title">Dầu Xả Mềm Mượt Keratin</div>
+                    <div class="node-file">chi-tiet-dau-xa-keratin.html</div>
+                </a>
+                <a href="chi-tiet-mat-na-u-toc.html" class="node-card">
+                    <div class="node-title">Mặt Nạ Ủ Tóc Chuyên Sâu</div>
+                    <div class="node-file">chi-tiet-mat-na-u-toc.html</div>
+                </a>
+                <a href="chi-tiet-xit-duong-moc-toc.html" class="node-card">
+                    <div class="node-title">Xịt Dưỡng Kích Mọc Tóc</div>
+                    <div class="node-file">chi-tiet-xit-duong-moc-toc.html</div>
+                </a>
+            </div>
+        </div>
+
+        <!-- Nhánh 4: Luồng Đặt Hàng & Trang Bổ Trợ -->
+        <div class="branch-column">
+            <div class="group-label">Luồng Đặt Hàng</div>
+            <div class="node-list">
+                <a href="cart.html" class="node-card gold-theme">
+                    <div class="node-title">1. Giỏ hàng</div>
+                    <div class="node-file">cart.html</div>
+                </a>
+                <a href="checkout.html" class="node-card gold-theme">
+                    <div class="node-title">2. Thông tin thanh toán</div>
+                    <div class="node-file">checkout.html</div>
+                </a>
+                <a href="confirmation.html" class="node-card gold-theme">
+                    <div class="node-title">3. Xác nhận đơn hàng</div>
+                    <div class="node-file">confirmation.html</div>
+                </a>
+
+                <div class="group-label mt-3 mb-2" style="background:none; border:none; box-shadow:none;">Trang bổ trợ</div>
+                <a href="sitemap.html" class="node-card">
+                    <div class="node-title">Sơ đồ trang web</div>
+                    <div class="node-file">sitemap.html</div>
+                </a>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Nút Quay lại trang chủ -->
+    <div class="text-center">
+        <a href="index.html" class="btn-back">&larr; Quay lại trang chủ</a>
+    </div>
+
+</body>
+</html>
